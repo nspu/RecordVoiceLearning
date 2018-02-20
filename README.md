@@ -6,7 +6,7 @@ You can make different list for different theme.
 It use the same method as https://www.memrise.com to memorise and learn but you can register your own question-answer for anything (import date, periodic table etc ...).
 
 
-## Getting start
+## Getting started
 
 To build this project, use "Import Project" or use the "gradlew build" command in Android Studio.
 
