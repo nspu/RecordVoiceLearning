@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="fr.nspu.dev.recordvoicelearning.view.fragment.AddFolderFragment">
+    <data>
+        <variable
+            name="folder"
+            type="fr.nspu.dev.recordvoicelearning.model.Folder"/>
+    </data>
+
+    <LinearLayout
+        android:id="@+id/cl_add_folder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/add_name_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:hint="@string/name"
+            android:text="@{folder.name}"
+            />
+
+        <EditText
+            android:id="@+id/add_type_question_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/question"
+            android:text="@{folder.typeQuestion}"/>
+
+        <EditText
+            android:id="@+id/add_type_answer_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/answer"
+            android:text="@{folder.typeAnswer}"/>
+
+    </LinearLayout>
+</layout>

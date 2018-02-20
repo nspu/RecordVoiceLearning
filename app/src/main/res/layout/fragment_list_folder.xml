@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="fr.nspu.dev.recordvoicelearning.view.fragment.FolderListFragment">
+
+
+    <data>
+        <variable
+            name="isLoading"
+            type="boolean" />
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/cl_list_folder">
+
+        <TextView
+            android:id="@+id/loading_tv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/loading_folders"
+            android:textAlignment="center"
+            app:visibleGone="@{isLoading}"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/folders_list"
+            android:contentDescription="@string/cd_folders_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="LinearLayoutManager"
+            app:visibleGone="@{!isLoading}"/>
+
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            app:srcCompat="@android:drawable/ic_menu_add"
+            app:backgroundTint="@color/colorPrimary"
+            app:borderWidth="0dp"
+            app:elevation="3dp"
+            />
+
+    </android.support.design.widget.CoordinatorLayout>
+</layout>

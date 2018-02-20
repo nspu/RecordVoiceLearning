@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isLoading"
+            type="boolean" />
+
+        <variable
+            name="count"
+            type="int" />
+
+        <variable
+            name="folderViewModel"
+            type="fr.nspu.dev.recordvoicelearning.viewmodel.FolderViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/include_item_folder"
+            layout="@layout/item_folder"
+            app:folder="@{folderViewModel.folder}" />
+
+        <TextView
+            android:id="@+id/tv_count_peers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{Integer.toString(count)}" />
+
+        <Button
+            android:id="@+id/btn_play_peers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/play"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/loading_peers_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/loading_peers"
+                app:visibleGone="@{isLoading}" />
+
+            <FrameLayout
+                android:id="@+id/peers_list_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/peers_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/cd_peers_list"
+                    app:layoutManager="LinearLayoutManager"
+                    app:visibleGone="@{!isLoading}" />
+            </FrameLayout>
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+</layout>
+

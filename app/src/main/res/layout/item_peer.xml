@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="peer"
+            type="fr.nspu.dev.recordvoicelearning.model.Peer" />
+
+        <variable
+            name="callback"
+            type="fr.nspu.dev.recordvoicelearning.utils.callback.ClickCallback" />
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:onClick="@{()->callback.onClick(peer)}"
+        android:onLongClick="@{()->callback.onLongClick(peer)}">
+
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/peer"
+                app:layout_constraintTop_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/knowledge_tv"
+                app:layout_constraintLeft_toLeftOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/knowledge_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/knowledge"
+                android:text="@{Integer.toString(peer.knowledge)}"
+                app:layout_constraintTop_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/name_tv"
+                app:layout_constraintRight_toRightOf="parent"
+                />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
+</layout>
