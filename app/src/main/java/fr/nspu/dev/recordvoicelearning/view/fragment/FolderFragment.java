@@ -102,6 +102,11 @@ public class FolderFragment extends Fragment {
                 mBinding.setIsLoading(false);
                 mPeerAdapter.setPeerList(peerEntities);
                 mBinding.setCount(peerEntities.size());
+                if(peerEntities.size() > 0){
+                    mBinding.btnPlayPeers.setEnabled(true);
+                }else{
+                    mBinding.btnPlayPeers.setEnabled(false);
+                }
             } else {
                 mBinding.setIsLoading(true);
             }
