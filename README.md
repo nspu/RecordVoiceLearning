@@ -8,7 +8,8 @@ It use the same method as https://www.memrise.com to memorise and learn but you 
 
 ## Getting started
 
-To build this project, use "Import Project" or use the "gradlew build" command in Android Studio.
+To build this project, use "Import Project" in Android Studio or use the `./gradlew build` command.
+The `./gradlew build` command does not work with JDK9.
 
 ### Progress
 Currently in development. https://trello.com/b/wla99302
