@@ -56,7 +56,7 @@ public class FolderListFragment extends Fragment {
 
         subscribeUi(viewModel);
 
-        FloatingActionButton fab = getView().findViewById(R.id.fab);
+        FloatingActionButton fab = getView().findViewById(R.id.fab_add_folder);
         fab.setOnClickListener(view -> ((MainActivity)getActivity()).addFolder());
 
         super.onActivityCreated(savedInstanceState);

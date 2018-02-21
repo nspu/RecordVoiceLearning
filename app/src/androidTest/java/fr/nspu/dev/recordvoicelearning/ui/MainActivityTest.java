@@ -135,7 +135,7 @@ private void test1AddFolders() throws Throwable{
 
     private void addFolder(String name, String typeQuestion, String typeAnswer) throws Throwable{
         drain();
-        onView(withId(R.id.action_add_folder)).perform(click());
+        onView(withId(R.id.fab_add_folder)).perform(click());
         drain();
         onView(withId(R.id.add_name_et)).perform(typeText(name));
         drain();
