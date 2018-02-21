@@ -22,7 +22,7 @@ import fr.nspu.dev.recordvoicelearning.controller.entity.PeerEntity;
  * Created by nspu on 18-02-04.
  */
 
-@Database(entities = {FolderEntity.class, PeerEntity.class}, version = 2)
+@Database(entities = {FolderEntity.class, PeerEntity.class}, version = 1)
 @TypeConverters(DateConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
 

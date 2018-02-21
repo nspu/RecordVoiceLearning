@@ -28,6 +28,12 @@ public class  FolderEntity implements Folder, Serializable {
     @ColumnInfo(name = "type_answer")
     private String typeAnswer;
 
+    @ColumnInfo(name = "order")
+    private int order;
+
+    @ColumnInfo(name = "question_to_answer")
+    private boolean questionToAnswer;
+
     @ColumnInfo(name = "created_at")
     private Date createdAt;
 
@@ -50,6 +56,16 @@ public class  FolderEntity implements Folder, Serializable {
     }
 
     @Override
+    public int getOrder() {
+        return this.order;
+    }
+
+    @Override
+    public boolean isQuestionToAnswer() {
+        return this.questionToAnswer;
+    }
+
+    @Override
     public int getId() {
         return this.id;
     }
@@ -66,18 +82,22 @@ public class  FolderEntity implements Folder, Serializable {
 
     public void setId(int id) {
         this.id = id;
+        this.updatedAt = new Date();
     }
 
     public void setName(String name) {
         this.name = name;
+        this.updatedAt = new Date();
     }
 
     public void setTypeQuestion(String typeQuesion) {
         this.typeQuestion = typeQuesion;
+        this.updatedAt = new Date();
     }
 
     public void setTypeAnswer(String typeAnswer) {
         this.typeAnswer = typeAnswer;
+        this.updatedAt = new Date();
     }
 
     public void setCreatedAt(Date createdAt) {
@@ -88,16 +108,32 @@ public class  FolderEntity implements Folder, Serializable {
         this.updatedAt = updatedAt;
     }
 
+    public void setOrder(int order) {
+        this.order = order;
+        this.updatedAt = new Date();
+    }
+
+    public void setQuestionToAnswer(boolean questionToAnswer) {
+        this.questionToAnswer = questionToAnswer;
+        this.updatedAt = new Date();
+    }
+
     public FolderEntity() {
+        this.order = Folder.ORDER_KNOWLEDGE_ASCENDING;
+        this.questionToAnswer = Folder.QUESTION_TO_ANSWER;
         this.createdAt = new Date();
         this.updatedAt = new Date();
     }
+
+
 
     public FolderEntity(int id, String name, String typeQuesion, String typeAnswer) {
         this.id = id;
         this.name = name;
         this.typeQuestion = typeQuesion;
         this.typeAnswer = typeAnswer;
+        this.order = Folder.ORDER_KNOWLEDGE_ASCENDING;
+        this.questionToAnswer = Folder.QUESTION_TO_ANSWER;
         this.createdAt = new Date();
         this.updatedAt = new Date();
     }
