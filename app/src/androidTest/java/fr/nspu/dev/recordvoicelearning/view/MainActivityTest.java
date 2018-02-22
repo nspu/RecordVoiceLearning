@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package fr.nspu.dev.recordvoicelearning.ui;
+package fr.nspu.dev.recordvoicelearning.view;
 
 
 import android.arch.core.executor.testing.CountingTaskExecutorRule;
@@ -44,7 +44,6 @@ import fr.nspu.dev.recordvoicelearning.EspressoTestUtil;
 import fr.nspu.dev.recordvoicelearning.R;
 import fr.nspu.dev.recordvoicelearning.RecyclerViewItemCountAssertion;
 import fr.nspu.dev.recordvoicelearning.controller.AppDatabase;
-import fr.nspu.dev.recordvoicelearning.view.MainActivity;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
