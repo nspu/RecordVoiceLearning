@@ -36,11 +36,41 @@
             android:layout_height="wrap_content"
             android:text="@{Integer.toString(count)}" />
 
-        <Button
-            android:id="@+id/btn_play_peers"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/play"/>
+            android:orientation="horizontal">
+
+            <ToggleButton
+                android:id="@+id/btn_question_to_answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textOn="@string/q_a"
+                android:textOff="@string/a_q"
+                android:layout_weight="0.50"
+                android:checked=
+                    "@{folderViewModel.folder.get().questionToAnswer}"/>
+
+            <Button
+                android:id="@+id/btn_play_peers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/play"
+                android:layout_weight="0.25"/>
+
+            <ToggleButton
+                android:id="@+id/btn_order"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textOff="@string/desc"
+                android:textOn="@string/asc"
+                android:layout_weight="0.50"
+                android:checked=
+                    "@{folderViewModel.folder.get().order.toInt()==0}"/>
+
+        </LinearLayout>
+
+
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -49,7 +79,8 @@
             <TextView
                 android:id="@+id/loading_peers_tv"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
                 android:text="@string/loading_peers"
                 app:visibleGone="@{isLoading}" />
 

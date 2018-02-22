@@ -30,12 +30,12 @@ public class FolderListViewModel extends AndroidViewModel {
 
         LiveData<List<FolderEntity>> folders = ((RecordVoiceLearning) application).getRepository().getFolders();
 
-        // observe the changes of the products from the database and forward them
+        // observe the changes of the folders from the database and forward them
         mObservableFolder.addSource(folders, mObservableFolder::setValue);
     }
 
     /**
-     * Expose the LiveData Products query so the UI can observe it.
+     * Expose the LiveData folders query so the UI can observe it.
      */
     public LiveData<List<FolderEntity>> getFolders() {
         return mObservableFolder;

@@ -24,7 +24,7 @@ public interface FolderDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertFolderSync(FolderEntity folder);
     @Update
-    void updateFoldersSync(FolderEntity... folders);
+    int updateFoldersSync(FolderEntity... folders);
     @Delete
     void deleteFolders(FolderEntity... folders);
     @Query("SELECT * FROM folders WHERE id = :id")
@@ -41,3 +41,5 @@ public interface FolderDao {
     @Query("SELECT * FROM folders")
     LiveData<List<FolderEntity>> loadAllFolders();
 }
+
+

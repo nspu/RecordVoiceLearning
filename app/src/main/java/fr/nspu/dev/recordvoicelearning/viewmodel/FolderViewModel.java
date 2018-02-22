@@ -36,7 +36,7 @@ public class FolderViewModel extends AndroidViewModel {
     }
 
     /**
-     * Expose the LiveData Comments query so the UI can observe it.
+     * Expose the LiveData peers query so the UI can observe it.
      */
     public LiveData<FolderEntity> getObservableFolder() {
         return mObservableFolder;
@@ -49,10 +49,10 @@ public class FolderViewModel extends AndroidViewModel {
     public LiveData<List<PeerEntity>> getPeers(){ return mObservablePeers; }
 
     /**
-     * A creator is used to inject the product ID into the ViewModel
+     * A creator is used to inject the folder ID into the ViewModel
      * <p>
      * This creator is to showcase how to inject dependencies into ViewModels. It's not
-     * actually necessary in this case, as the product ID can be passed in a public method.
+     * actually necessary in this case, as the folder ID can be passed in a public method.
      */
     public static class Factory extends ViewModelProvider.NewInstanceFactory {
 

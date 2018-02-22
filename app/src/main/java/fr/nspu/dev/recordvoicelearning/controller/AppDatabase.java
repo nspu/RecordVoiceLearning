@@ -13,17 +13,19 @@ import android.support.annotation.VisibleForTesting;
 
 import fr.nspu.dev.recordvoicelearning.AppExecutors;
 import fr.nspu.dev.recordvoicelearning.controller.converter.DateConverter;
+import fr.nspu.dev.recordvoicelearning.controller.converter.OrderPeerEnumConverter;
 import fr.nspu.dev.recordvoicelearning.controller.dao.FolderDao;
 import fr.nspu.dev.recordvoicelearning.controller.dao.PeerDao;
 import fr.nspu.dev.recordvoicelearning.controller.entity.FolderEntity;
 import fr.nspu.dev.recordvoicelearning.controller.entity.PeerEntity;
+import fr.nspu.dev.recordvoicelearning.model.OrderPeerEnum;
 
 /**
  * Created by nspu on 18-02-04.
  */
 
 @Database(entities = {FolderEntity.class, PeerEntity.class}, version = 1)
-@TypeConverters(DateConverter.class)
+@TypeConverters({DateConverter.class, OrderPeerEnumConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase sInstance;

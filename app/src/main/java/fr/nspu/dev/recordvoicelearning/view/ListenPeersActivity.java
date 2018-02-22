@@ -19,15 +19,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import java.util.Collections;
 import java.util.List;
 
 import fr.nspu.dev.recordvoicelearning.RecordVoiceLearning;
 import fr.nspu.dev.recordvoicelearning.R;
 import fr.nspu.dev.recordvoicelearning.controller.entity.PeerEntity;
 import fr.nspu.dev.recordvoicelearning.databinding.FragmentListenPeersBinding;
+import fr.nspu.dev.recordvoicelearning.model.OrderPeerEnum;
 import fr.nspu.dev.recordvoicelearning.utils.ListenVoice;
 
 import static fr.nspu.dev.recordvoicelearning.view.fragment.FolderFragment.KEY_FOLDER_ID;
+import static fr.nspu.dev.recordvoicelearning.view.fragment.FolderFragment.KEY_ORDER;
 
 public class ListenPeersActivity extends AppCompatActivity {
 
@@ -37,6 +40,8 @@ public class ListenPeersActivity extends AppCompatActivity {
     private static ViewPager mViewPager;
 
     private List<PeerEntity> mPeers;
+
+    private OrderPeerEnum mOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +57,8 @@ public class ListenPeersActivity extends AppCompatActivity {
             //TODO error
             finish();
         }
+
+        mOrder = OrderPeerEnum.toOrderPeerEnum(getIntent().getIntExtra(KEY_ORDER, 0));
 
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         this.getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -71,6 +78,14 @@ public class ListenPeersActivity extends AppCompatActivity {
       {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
         SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+        if(mOrder == OrderPeerEnum.ORDER_KNOWLEDGE_ASCENDING)
+
+            if(mOrder == OrderPeerEnum.ORDER_KNOWLEDGE_ASCENDING){
+                Collections.sort(mPeers, (o1, o2) -> Integer.compare(o1.getKnowledge(), o2.getKnowledge()));
+            }else{
+                Collections.sort(mPeers, (o1, o2) -> Integer.compare(o2.getKnowledge(), o1.getKnowledge()));
+            }
 
 
         // Set up the ViewPager with the sections adapter.

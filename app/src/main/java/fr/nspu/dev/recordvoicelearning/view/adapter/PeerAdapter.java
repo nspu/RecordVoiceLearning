@@ -74,7 +74,9 @@ public class PeerAdapter extends RecyclerView.Adapter<PeerAdapter.PeerViewHolder
                     return newPeer.getId() == oldPeer.getId()
                             && newPeer.getFolderId() == oldPeer.getFolderId()
                             && Objects.equals(newPeer.getFileNameAnswer(),oldPeer.getFileNameAnswer())
-                            && Objects.equals(newPeer.getFileNameQuestion(),oldPeer.getFileNameQuestion());
+                            && Objects.equals(newPeer.getFileNameQuestion(),oldPeer.getFileNameQuestion())
+                            && Objects.equals(newPeer.getKnowledge(),oldPeer.getKnowledge())
+                            && Objects.equals(newPeer.getCount(),oldPeer.getCount());
 //                            && newPeer.getCreatedAt().getTime() == oldPeer.getCreatedAt().getTime()
 //                            && newPeer.getUpdatedAt().getTime() == oldPeer.getUpdatedAt().getTime();
                 }
