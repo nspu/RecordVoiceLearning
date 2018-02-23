@@ -2,7 +2,7 @@ package fr.nspu.dev.recordvoicelearning.controller.converter;
 
 import android.arch.persistence.room.TypeConverter;
 
-import fr.nspu.dev.recordvoicelearning.model.OrderPeerEnum;
+import fr.nspu.dev.recordvoicelearning.utils.OrderPeerEnum;
 
 
 /**
@@ -17,6 +17,6 @@ public class OrderPeerEnumConverter {
 
     @TypeConverter
     public static int toInt(OrderPeerEnum orderPeerEnum) {
-        return orderPeerEnum.toInt();
+        return orderPeerEnum == null ? 0 : orderPeerEnum.toInt();
     }
 }

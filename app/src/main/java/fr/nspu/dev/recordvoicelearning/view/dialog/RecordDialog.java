@@ -25,7 +25,7 @@ public class RecordDialog extends Dialog {
         super(context);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         mBinding = DataBindingUtil.inflate(
-                LayoutInflater.from(getContext()),
+                LayoutInflater.from(context),
                 R.layout.dialog_record,
                 null,
                 true);

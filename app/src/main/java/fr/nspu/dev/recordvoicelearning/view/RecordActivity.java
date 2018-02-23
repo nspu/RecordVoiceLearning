@@ -91,7 +91,7 @@ public class RecordActivity extends AppCompatActivity {
 
         mBinding.resetBtn.setOnClickListener(v -> init());
 
-        new RecordVoice(mBinding.recordQuestionBtn, fileNameQuestion, directory, this) {
+        new RecordVoice(fileNameQuestion, directory, mBinding.recordQuestionBtn, this) {
 
             @Override
             public void onRecordFinish(String fileName) {
@@ -100,7 +100,7 @@ public class RecordActivity extends AppCompatActivity {
             }
         };
 
-        new RecordVoice(mBinding.recordAnswerBtn, fileNameAnswer, directory, this) {
+        new RecordVoice(fileNameAnswer, directory, mBinding.recordAnswerBtn, this) {
             @Override
             public void onRecordFinish(String fileName) {
                 mPeer.setFileNameAnswer(fileName);
