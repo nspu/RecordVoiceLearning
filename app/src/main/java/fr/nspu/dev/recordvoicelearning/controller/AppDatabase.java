@@ -18,7 +18,6 @@ import fr.nspu.dev.recordvoicelearning.controller.dao.FolderDao;
 import fr.nspu.dev.recordvoicelearning.controller.dao.PeerDao;
 import fr.nspu.dev.recordvoicelearning.controller.entity.FolderEntity;
 import fr.nspu.dev.recordvoicelearning.controller.entity.PeerEntity;
-import fr.nspu.dev.recordvoicelearning.model.OrderPeerEnum;
 
 /**
  * Created by nspu on 18-02-04.

@@ -89,26 +89,38 @@ public class PeerEntity implements Peer, Serializable {
 
     public void setId(int id) {
         this.id = id;
+        this.updatedAt = new Date();
     }
 
     public void setFolderId(int folderId) {
         this.folderId = folderId;
+        this.updatedAt = new Date();
     }
 
     public void setFileNameQuestion(String fileNameQuestion) {
         this.fileNameQuestion = fileNameQuestion;
+        this.updatedAt = new Date();
     }
 
     public void setFileNameAnswer(String fileNameAnswer) {
         this.fileNameAnswer = fileNameAnswer;
+        this.updatedAt = new Date();
     }
 
     public void setKnowledge(int knowledge) {
-        this.knowledge = knowledge;
+        if(knowledge > 10){
+            this.knowledge = 10;
+        }else if(knowledge < 0){
+            this.knowledge = 0;
+        }else{
+            this.knowledge = knowledge;
+        }
+        this.updatedAt = new Date();
     }
 
     public void setCount(int count){
         this.count = count;
+        this.updatedAt = new Date();
     }
 
     public void increaseKnowledge(){
@@ -116,6 +128,7 @@ public class PeerEntity implements Peer, Serializable {
             knowledge++;
         }
         this.count++;
+        this.updatedAt = new Date();
     }
 
     public void descreaseKnowledge(){
@@ -123,6 +136,7 @@ public class PeerEntity implements Peer, Serializable {
             knowledge--;
         }
         this.count++;
+        this.updatedAt = new Date();
     }
 
     public void setCreatedAt(Date createdAt) {

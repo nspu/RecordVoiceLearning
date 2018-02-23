@@ -43,7 +43,7 @@ public class ListenVoice implements View.OnClickListener{
         }
     }
 
-    private void stopPlaying() {
+    public void stopPlaying() {
         mPlayer.release();
         mPlayer = null;
     }

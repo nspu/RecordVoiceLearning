@@ -26,7 +26,7 @@ import fr.nspu.dev.recordvoicelearning.RecordVoiceLearning;
 import fr.nspu.dev.recordvoicelearning.R;
 import fr.nspu.dev.recordvoicelearning.controller.entity.PeerEntity;
 import fr.nspu.dev.recordvoicelearning.databinding.FragmentListenPeersBinding;
-import fr.nspu.dev.recordvoicelearning.model.OrderPeerEnum;
+import fr.nspu.dev.recordvoicelearning.utils.OrderPeerEnum;
 import fr.nspu.dev.recordvoicelearning.utils.ListenVoice;
 
 import static fr.nspu.dev.recordvoicelearning.view.fragment.FolderFragment.KEY_FOLDER_ID;
@@ -79,9 +79,9 @@ public class ListenPeersActivity extends AppCompatActivity {
      */
         SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        if(mOrder == OrderPeerEnum.ORDER_KNOWLEDGE_ASCENDING)
+        if(mOrder == OrderPeerEnum.KNOWLEDGE_ASCENDING)
 
-            if(mOrder == OrderPeerEnum.ORDER_KNOWLEDGE_ASCENDING){
+            if(mOrder == OrderPeerEnum.KNOWLEDGE_ASCENDING){
                 Collections.sort(mPeers, (o1, o2) -> Integer.compare(o1.getKnowledge(), o2.getKnowledge()));
             }else{
                 Collections.sort(mPeers, (o1, o2) -> Integer.compare(o2.getKnowledge(), o1.getKnowledge()));
@@ -252,6 +252,4 @@ public class ListenPeersActivity extends AppCompatActivity {
             init();
         }
     }
-
-
 }

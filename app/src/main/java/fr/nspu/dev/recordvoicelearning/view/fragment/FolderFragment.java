@@ -26,7 +26,7 @@ import fr.nspu.dev.recordvoicelearning.controller.entity.FolderEntity;
 import fr.nspu.dev.recordvoicelearning.controller.entity.PeerEntity;
 import fr.nspu.dev.recordvoicelearning.databinding.FragmentFolderBinding;
 import fr.nspu.dev.recordvoicelearning.model.Folder;
-import fr.nspu.dev.recordvoicelearning.model.OrderPeerEnum;
+import fr.nspu.dev.recordvoicelearning.utils.OrderPeerEnum;
 import fr.nspu.dev.recordvoicelearning.utils.callback.ClickCallback;
 import fr.nspu.dev.recordvoicelearning.view.ListenPeersActivity;
 import fr.nspu.dev.recordvoicelearning.view.RecordActivity;
@@ -57,7 +57,7 @@ public class FolderFragment extends Fragment {
             if(folderEntity != null){
                 intent.putExtra(KEY_ORDER, folderEntity.getOrder().toInt());
             }else{
-                intent.putExtra(KEY_ORDER, OrderPeerEnum.ORDER_KNOWLEDGE_ASCENDING.toInt());
+                intent.putExtra(KEY_ORDER, OrderPeerEnum.KNOWLEDGE_ASCENDING.toInt());
             }
 
             startActivity(intent);
@@ -67,10 +67,10 @@ public class FolderFragment extends Fragment {
             FolderEntity folderEntity = mBinding.getFolderViewModel().folder.get();
             boolean isChecked = ((ToggleButton)v).isChecked();
             if(folderEntity != null && isChecked){
-                folderEntity.setOrder(OrderPeerEnum.ORDER_KNOWLEDGE_ASCENDING);
+                folderEntity.setOrder(OrderPeerEnum.KNOWLEDGE_ASCENDING);
                 new UpdateFolderAsync().execute(folderEntity);
             }else{
-                folderEntity.setOrder(OrderPeerEnum.ORDER_KNOWLEDGE_DESCENDING);
+                folderEntity.setOrder(OrderPeerEnum.KNOWLEDGE_DESCENDING);
                 new UpdateFolderAsync().execute(folderEntity);
             }
         });
@@ -141,7 +141,7 @@ public class FolderFragment extends Fragment {
             model.getPeers().observe(this, peerEntities -> {
                 if (peerEntities != null) {
                     mBinding.setIsLoading(false);
-                    if(folderEntity.getOrder() == OrderPeerEnum.ORDER_KNOWLEDGE_ASCENDING){
+                    if(folderEntity.getOrder() == OrderPeerEnum.KNOWLEDGE_ASCENDING){
                         Collections.sort(peerEntities, (o1, o2) -> Integer.compare(o1.getKnowledge(), o2.getKnowledge()));
                     }else{
                         Collections.sort(peerEntities, (o1, o2) -> Integer.compare(o2.getKnowledge(), o1.getKnowledge()));

@@ -1,5 +1,7 @@
 package fr.nspu.dev.recordvoicelearning.model;
 
+import fr.nspu.dev.recordvoicelearning.utils.OrderPeerEnum;
+
 /**
  * Created by nspu on 18-02-03.
  */

@@ -1,9 +1,10 @@
-package fr.nspu.dev.recordvoicelearning.model;
+package fr.nspu.dev.recordvoicelearning.utils;
 
 public enum OrderPeerEnum{
         //Order
-        ORDER_KNOWLEDGE_ASCENDING(0),
-        ORDER_KNOWLEDGE_DESCENDING(1);
+        DEFAULT(0),
+        KNOWLEDGE_ASCENDING(0),
+        KNOWLEDGE_DESCENDING(1);
 
         int order = 0;
 
@@ -18,11 +19,11 @@ public enum OrderPeerEnum{
         public static OrderPeerEnum toOrderPeerEnum(int id){
             switch (id){
                 case 0:
-                    return ORDER_KNOWLEDGE_ASCENDING;
+                    return KNOWLEDGE_ASCENDING;
                 case 1:
-                    return ORDER_KNOWLEDGE_DESCENDING;
+                    return KNOWLEDGE_DESCENDING;
                 default:
-                    return ORDER_KNOWLEDGE_ASCENDING;
+                    return DEFAULT;
             }
         }
 }
