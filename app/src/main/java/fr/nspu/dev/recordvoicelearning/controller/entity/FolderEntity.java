@@ -9,6 +9,7 @@ import java.util.Date;
 
 import fr.nspu.dev.recordvoicelearning.model.Folder;
 import fr.nspu.dev.recordvoicelearning.utils.OrderPeerEnum;
+import fr.nspu.dev.recordvoicelearning.utils.QuestionToAnswerEnum;
 
 /**
  * Created by nspu on 18-02-02.
@@ -33,7 +34,7 @@ public class  FolderEntity implements Folder, Serializable {
     private OrderPeerEnum order;
 
     @ColumnInfo(name = "question_to_answer")
-    private boolean questionToAnswer;
+    private QuestionToAnswerEnum questionToAnswer;
 
     @ColumnInfo(name = "created_at")
     private Date createdAt;
@@ -62,7 +63,7 @@ public class  FolderEntity implements Folder, Serializable {
     }
 
     @Override
-    public boolean isQuestionToAnswer() {
+    public QuestionToAnswerEnum getQuestionToAnswer() {
         return this.questionToAnswer;
     }
 
@@ -106,7 +107,7 @@ public class  FolderEntity implements Folder, Serializable {
         this.updatedAt = new Date();
     }
 
-    public void setQuestionToAnswer(boolean questionToAnswer) {
+    public void setQuestionToAnswer(QuestionToAnswerEnum questionToAnswer) {
         this.questionToAnswer = questionToAnswer;
         this.updatedAt = new Date();
     }
@@ -128,8 +129,8 @@ public class  FolderEntity implements Folder, Serializable {
         this.name = name;
         this.typeQuestion = typeQuesion;
         this.typeAnswer = typeAnswer;
-        this.order = OrderPeerEnum.KNOWLEDGE_ASCENDING;
-        this.questionToAnswer = Folder.QUESTION_TO_ANSWER;
+        this.order = OrderPeerEnum.DEFAULT;
+        this.questionToAnswer = QuestionToAnswerEnum.DEFAULT;
         this.createdAt = new Date();
         this.updatedAt = new Date();
     }

@@ -27,6 +27,7 @@ import fr.nspu.dev.recordvoicelearning.controller.entity.PeerEntity;
 import fr.nspu.dev.recordvoicelearning.databinding.FragmentFolderBinding;
 import fr.nspu.dev.recordvoicelearning.model.Folder;
 import fr.nspu.dev.recordvoicelearning.utils.OrderPeerEnum;
+import fr.nspu.dev.recordvoicelearning.utils.QuestionToAnswerEnum;
 import fr.nspu.dev.recordvoicelearning.utils.callback.ClickCallback;
 import fr.nspu.dev.recordvoicelearning.view.ListenPeersActivity;
 import fr.nspu.dev.recordvoicelearning.view.RecordActivity;
@@ -36,7 +37,7 @@ import fr.nspu.dev.recordvoicelearning.viewmodel.FolderViewModel;
 public class FolderFragment extends Fragment {
     public static final String KEY_FOLDER_ID = "id_folder";
     public static final String KEY_ORDER = "ordre_peer";
-
+    public static final String KEY_QUESTION_TO_ANSWER = "question_to_anwser";
 
     private FragmentFolderBinding mBinding;
     private PeerAdapter mPeerAdapter;
@@ -56,8 +57,10 @@ public class FolderFragment extends Fragment {
             FolderEntity folderEntity = mBinding.getFolderViewModel().folder.get();
             if(folderEntity != null){
                 intent.putExtra(KEY_ORDER, folderEntity.getOrder().toInt());
+                intent.putExtra(KEY_QUESTION_TO_ANSWER, folderEntity.getQuestionToAnswer().toBoolean());
             }else{
-                intent.putExtra(KEY_ORDER, OrderPeerEnum.KNOWLEDGE_ASCENDING.toInt());
+                intent.putExtra(KEY_ORDER, OrderPeerEnum.DEFAULT.toInt());
+                intent.putExtra(KEY_QUESTION_TO_ANSWER, QuestionToAnswerEnum.DEFAULT.toBoolean());
             }
 
             startActivity(intent);
@@ -79,10 +82,10 @@ public class FolderFragment extends Fragment {
         mBinding.btnQuestionToAnswer.setOnCheckedChangeListener((buttonView, isChecked) -> {
             FolderEntity folderEntity = mBinding.getFolderViewModel().folder.get();
             if(folderEntity != null && isChecked){
-                folderEntity.setQuestionToAnswer(FolderEntity.QUESTION_TO_ANSWER);
+                folderEntity.setQuestionToAnswer(QuestionToAnswerEnum.QUESTION_TO_ANSWER);
                 new UpdateFolderAsync().execute(folderEntity);
             }else{
-                folderEntity.setQuestionToAnswer(Folder.ANSWER_TO_QUESTION);
+                folderEntity.setQuestionToAnswer(QuestionToAnswerEnum.ANSWER_TO_QUESTION);
                 new UpdateFolderAsync().execute(folderEntity);
             }
         });
@@ -178,27 +181,25 @@ public class FolderFragment extends Fragment {
         }
     };
 
-    public static FolderFragment forFolder(int idFolder) {
+    public static FolderFragment forFolder(int idFolder, QuestionToAnswerEnum questionToAnswer) {
         FolderFragment fragment = new FolderFragment();
         Bundle args = new Bundle();
         args.putInt(KEY_FOLDER_ID, idFolder);
+        args.putBoolean(KEY_QUESTION_TO_ANSWER, questionToAnswer.toBoolean());
         fragment.setArguments(args);
         return fragment;
     }
 
     private class UpdateFolderAsync extends AsyncTask<FolderEntity, Void, Void> {
-
         @Override
         protected Void doInBackground(FolderEntity... folderEntities) {
-            int a = ((RecordVoiceLearning) getActivity().getApplication()).getDatabase().folderDao().updateFoldersSync(folderEntities[0]);
-
+            int a = ((RecordVoiceLearning) getActivity().getApplication())
+                    .getDatabase()
+                    .folderDao()
+                    .updateFoldersSync(folderEntities[0]);
             return null;
         }
-
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-        }
     }
+
+
 }
