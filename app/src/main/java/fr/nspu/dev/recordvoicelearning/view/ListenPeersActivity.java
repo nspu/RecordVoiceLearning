@@ -28,9 +28,11 @@ import fr.nspu.dev.recordvoicelearning.controller.entity.PeerEntity;
 import fr.nspu.dev.recordvoicelearning.databinding.FragmentListenPeersBinding;
 import fr.nspu.dev.recordvoicelearning.utils.OrderPeerEnum;
 import fr.nspu.dev.recordvoicelearning.utils.ListenVoice;
+import fr.nspu.dev.recordvoicelearning.utils.QuestionToAnswerEnum;
 
 import static fr.nspu.dev.recordvoicelearning.view.fragment.FolderFragment.KEY_FOLDER_ID;
 import static fr.nspu.dev.recordvoicelearning.view.fragment.FolderFragment.KEY_ORDER;
+import static fr.nspu.dev.recordvoicelearning.view.fragment.FolderFragment.KEY_QUESTION_TO_ANSWER;
 
 public class ListenPeersActivity extends AppCompatActivity {
 
@@ -42,6 +44,8 @@ public class ListenPeersActivity extends AppCompatActivity {
     private List<PeerEntity> mPeers;
 
     private OrderPeerEnum mOrder;
+
+    private QuestionToAnswerEnum mQuestionToAnswer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +63,8 @@ public class ListenPeersActivity extends AppCompatActivity {
         }
 
         mOrder = OrderPeerEnum.toOrderPeerEnum(getIntent().getIntExtra(KEY_ORDER, 0));
+        mQuestionToAnswer = QuestionToAnswerEnum.toQuestionToAnswerEnum(
+                getIntent().getBooleanExtra(KEY_QUESTION_TO_ANSWER, true));
 
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         this.getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -113,22 +119,26 @@ public class ListenPeersActivity extends AppCompatActivity {
         private static final String PEER_OBJECT = "PEER_OBJECT";
         private static final String POSITION = "POSITION";
         private static final String SIZE_PEERS = "SIZE_PEERS";
+        private static final String QUESTION_TO_ANSWER = "QUESTION_TO_ANSWER";
 
         private FragmentListenPeersBinding mBinding;
         private PeerEntity mPeer;
         private int mPosition;
         private int mSize;
+        private String mQuestionFile;
+        private String mAnswerFile;
 
         /**
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderFragment newInstance(PeerEntity peer, int position, int size) {
+        public static PlaceholderFragment newInstance(PeerEntity peer, int position, int size, QuestionToAnswerEnum questionToAnswer) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putSerializable(PEER_OBJECT, peer);
             args.putInt(POSITION, position);
             args.putInt(SIZE_PEERS, size);
+            args.putBoolean(QUESTION_TO_ANSWER, questionToAnswer.toBoolean());
             fragment.setArguments(args);
             return fragment;
         }
@@ -136,26 +146,38 @@ public class ListenPeersActivity extends AppCompatActivity {
         @Override
         public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
+            QuestionToAnswerEnum questionToAnswer =
+                    QuestionToAnswerEnum.toQuestionToAnswerEnum(
+                            getArguments().getBoolean(QUESTION_TO_ANSWER));
             mPeer = (PeerEntity) getArguments().getSerializable(PEER_OBJECT);
             mPosition = getArguments().getInt(POSITION);
             mSize = getArguments().getInt(SIZE_PEERS);
+
             mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_listen_peers, container, false);
 
             mBinding.tvPeerName.setText(getContext().getString(R.string.peer_idpeer, mPeer.getId()));
             mBinding.tvPositionTotal.setText(getContext().getString(R.string._slash_, mPosition+1, mSize));
             mBinding.sbKnowledge.setProgress(mPeer.getKnowledge());
 
+            if(questionToAnswer == QuestionToAnswerEnum.QUESTION_TO_ANSWER){
+                mQuestionFile = mPeer.getFileNameQuestion();
+                mAnswerFile = mPeer.getFileNameAnswer();
+            }else{
+                mQuestionFile = mPeer.getFileNameAnswer();
+                mAnswerFile = mPeer.getFileNameQuestion();
+            }
+
 
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
             boolean isAutoPlay = sharedPreferences.getBoolean(getString(R.string.settings_auto_play), true);
 
-            ListenVoice listenVoice = listen(mBinding.btnListenQuestion, mPeer.getFileNameQuestion());
+            ListenVoice listenVoice = listen(mBinding.btnListenQuestion, mQuestionFile);
 
             if(isAutoPlay){
                 listenVoice.startPlaying();
             }
 
-            listen(mBinding.btnListenAnswer, mPeer.getFileNameAnswer());
+            listen(mBinding.btnListenAnswer, mAnswerFile);
 
             mBinding.btnGood.setOnClickListener(v -> {
                 mPeer.increaseKnowledge();
@@ -225,7 +247,7 @@ public class ListenPeersActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(mPeers.get(position), position, mPeers.size());
+            return PlaceholderFragment.newInstance(mPeers.get(position), position, mPeers.size(), mQuestionToAnswer);
         }
 
         @Override

@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     /** Shows the folder detail fragment */
     public void showFolder(Folder folder) {
 
-        FolderFragment productFragment = FolderFragment.forFolder(folder.getId());
+        FolderFragment productFragment = FolderFragment.forFolder(folder.getId(), folder.getQuestionToAnswer());
 
         getSupportFragmentManager()
                 .beginTransaction()

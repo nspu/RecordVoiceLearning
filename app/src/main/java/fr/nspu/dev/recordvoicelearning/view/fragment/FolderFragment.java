@@ -37,7 +37,7 @@ import fr.nspu.dev.recordvoicelearning.viewmodel.FolderViewModel;
 public class FolderFragment extends Fragment {
     public static final String KEY_FOLDER_ID = "id_folder";
     public static final String KEY_ORDER = "ordre_peer";
-
+    public static final String KEY_QUESTION_TO_ANSWER = "question_to_anwser";
 
     private FragmentFolderBinding mBinding;
     private PeerAdapter mPeerAdapter;
@@ -57,8 +57,10 @@ public class FolderFragment extends Fragment {
             FolderEntity folderEntity = mBinding.getFolderViewModel().folder.get();
             if(folderEntity != null){
                 intent.putExtra(KEY_ORDER, folderEntity.getOrder().toInt());
+                intent.putExtra(KEY_QUESTION_TO_ANSWER, folderEntity.getQuestionToAnswer().toBoolean());
             }else{
-                intent.putExtra(KEY_ORDER, OrderPeerEnum.KNOWLEDGE_ASCENDING.toInt());
+                intent.putExtra(KEY_ORDER, OrderPeerEnum.DEFAULT.toInt());
+                intent.putExtra(KEY_QUESTION_TO_ANSWER, QuestionToAnswerEnum.DEFAULT.toBoolean());
             }
 
             startActivity(intent);
@@ -179,10 +181,11 @@ public class FolderFragment extends Fragment {
         }
     };
 
-    public static FolderFragment forFolder(int idFolder) {
+    public static FolderFragment forFolder(int idFolder, QuestionToAnswerEnum questionToAnswer) {
         FolderFragment fragment = new FolderFragment();
         Bundle args = new Bundle();
         args.putInt(KEY_FOLDER_ID, idFolder);
+        args.putBoolean(KEY_QUESTION_TO_ANSWER, questionToAnswer.toBoolean());
         fragment.setArguments(args);
         return fragment;
     }
