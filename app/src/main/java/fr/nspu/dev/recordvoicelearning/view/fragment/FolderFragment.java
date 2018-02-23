@@ -27,6 +27,7 @@ import fr.nspu.dev.recordvoicelearning.controller.entity.PeerEntity;
 import fr.nspu.dev.recordvoicelearning.databinding.FragmentFolderBinding;
 import fr.nspu.dev.recordvoicelearning.model.Folder;
 import fr.nspu.dev.recordvoicelearning.utils.OrderPeerEnum;
+import fr.nspu.dev.recordvoicelearning.utils.QuestionToAnswerEnum;
 import fr.nspu.dev.recordvoicelearning.utils.callback.ClickCallback;
 import fr.nspu.dev.recordvoicelearning.view.ListenPeersActivity;
 import fr.nspu.dev.recordvoicelearning.view.RecordActivity;
@@ -79,10 +80,10 @@ public class FolderFragment extends Fragment {
         mBinding.btnQuestionToAnswer.setOnCheckedChangeListener((buttonView, isChecked) -> {
             FolderEntity folderEntity = mBinding.getFolderViewModel().folder.get();
             if(folderEntity != null && isChecked){
-                folderEntity.setQuestionToAnswer(FolderEntity.QUESTION_TO_ANSWER);
+                folderEntity.setQuestionToAnswer(QuestionToAnswerEnum.QUESTION_TO_ANSWER);
                 new UpdateFolderAsync().execute(folderEntity);
             }else{
-                folderEntity.setQuestionToAnswer(Folder.ANSWER_TO_QUESTION);
+                folderEntity.setQuestionToAnswer(QuestionToAnswerEnum.ANSWER_TO_QUESTION);
                 new UpdateFolderAsync().execute(folderEntity);
             }
         });
@@ -187,18 +188,15 @@ public class FolderFragment extends Fragment {
     }
 
     private class UpdateFolderAsync extends AsyncTask<FolderEntity, Void, Void> {
-
         @Override
         protected Void doInBackground(FolderEntity... folderEntities) {
-            int a = ((RecordVoiceLearning) getActivity().getApplication()).getDatabase().folderDao().updateFoldersSync(folderEntities[0]);
-
+            int a = ((RecordVoiceLearning) getActivity().getApplication())
+                    .getDatabase()
+                    .folderDao()
+                    .updateFoldersSync(folderEntities[0]);
             return null;
         }
-
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-        }
     }
+
+
 }

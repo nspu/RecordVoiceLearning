@@ -48,12 +48,11 @@ public abstract class RecordVoice implements View.OnClickListener {
                 //stop
                 isRecord = false;
                 RecordVoice.this.stopRecording();
-                mRecordDialog.hide();
+                mRecordDialog.dismiss();
             });
         } else {
             mRecordDialog = null;
         }
-
     }
 
     public void startRecording() {

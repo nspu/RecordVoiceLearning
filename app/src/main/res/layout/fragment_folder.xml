@@ -49,7 +49,7 @@
                 android:textOff="@string/a_q"
                 android:layout_weight="0.50"
                 android:checked=
-                    "@{folderViewModel.folder.get().questionToAnswer}"/>
+                    "@{folderViewModel.folder.get().questionToAnswer.toBoolean()}"/>
 
             <Button
                 android:id="@+id/btn_play_peers"

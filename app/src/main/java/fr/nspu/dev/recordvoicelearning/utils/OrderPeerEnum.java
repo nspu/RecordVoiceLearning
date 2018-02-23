@@ -1,7 +1,6 @@
 package fr.nspu.dev.recordvoicelearning.utils;
 
 public enum OrderPeerEnum{
-        //Order
         DEFAULT(0),
         KNOWLEDGE_ASCENDING(0),
         KNOWLEDGE_DESCENDING(1);

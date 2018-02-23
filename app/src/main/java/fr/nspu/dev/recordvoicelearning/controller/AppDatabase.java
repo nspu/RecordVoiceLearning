@@ -14,6 +14,7 @@ import android.support.annotation.VisibleForTesting;
 import fr.nspu.dev.recordvoicelearning.AppExecutors;
 import fr.nspu.dev.recordvoicelearning.controller.converter.DateConverter;
 import fr.nspu.dev.recordvoicelearning.controller.converter.OrderPeerEnumConverter;
+import fr.nspu.dev.recordvoicelearning.controller.converter.QuestionToAnswerEnumConverter;
 import fr.nspu.dev.recordvoicelearning.controller.dao.FolderDao;
 import fr.nspu.dev.recordvoicelearning.controller.dao.PeerDao;
 import fr.nspu.dev.recordvoicelearning.controller.entity.FolderEntity;
@@ -24,7 +25,7 @@ import fr.nspu.dev.recordvoicelearning.controller.entity.PeerEntity;
  */
 
 @Database(entities = {FolderEntity.class, PeerEntity.class}, version = 1)
-@TypeConverters({DateConverter.class, OrderPeerEnumConverter.class})
+@TypeConverters({DateConverter.class, OrderPeerEnumConverter.class, QuestionToAnswerEnumConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase sInstance;
