@@ -22,8 +22,8 @@ import fr.nspu.dev.recordvoicelearning.R;
 import fr.nspu.dev.recordvoicelearning.controller.entity.FolderEntity;
 import fr.nspu.dev.recordvoicelearning.databinding.FragmentListFolderBinding;
 import fr.nspu.dev.recordvoicelearning.utils.callback.ClickCallback;
-import fr.nspu.dev.recordvoicelearning.view.SettingsActivity;
-import fr.nspu.dev.recordvoicelearning.view.MainActivity;
+import fr.nspu.dev.recordvoicelearning.view.activity.SettingsActivity;
+import fr.nspu.dev.recordvoicelearning.view.activity.MainActivity;
 import fr.nspu.dev.recordvoicelearning.view.adapter.FolderAdapter;
 import fr.nspu.dev.recordvoicelearning.viewmodel.FolderListViewModel;
 

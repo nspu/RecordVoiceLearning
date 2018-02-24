@@ -1,22 +1,10 @@
 package fr.nspu.dev.recordvoicelearning.utils;
 
-import android.content.Context;
-import android.widget.Button;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-
-import java.io.File;
-
-import fr.nspu.dev.recordvoicelearning.BuildConfig;
-import fr.nspu.dev.recordvoicelearning.view.RecordActivity;
 
 import static org.junit.Assert.*;
 
