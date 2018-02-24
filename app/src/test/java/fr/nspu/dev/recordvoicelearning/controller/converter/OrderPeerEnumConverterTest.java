@@ -16,7 +16,7 @@ public class OrderPeerEnumConverterTest {
         OrderPeerEnum orderPeerEnumCorrect0 = OrderPeerEnumConverter.toOrderPeerEnum(0);
         OrderPeerEnum orderPeerEnumCorrect1 = OrderPeerEnumConverter.toOrderPeerEnum(1);
 
-        assertEquals(orderPeerEnumNotInRange, OrderPeerEnum.DEFAULT);
+        assertEquals(orderPeerEnumNotInRange, OrderPeerEnum.KNOWLEDGE_ASCENDING);
         assertEquals(orderPeerEnumCorrect0, OrderPeerEnum.KNOWLEDGE_ASCENDING);
         assertEquals(orderPeerEnumCorrect1, OrderPeerEnum.KNOWLEDGE_DESCENDING);
     }

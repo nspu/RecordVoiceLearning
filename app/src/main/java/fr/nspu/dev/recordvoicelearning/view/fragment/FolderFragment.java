@@ -58,8 +58,8 @@ public class FolderFragment extends Fragment {
                 intent.putExtra(KEY_ORDER, folderEntity.getOrder().toInt());
                 intent.putExtra(KEY_QUESTION_TO_ANSWER, folderEntity.getQuestionToAnswer().toBoolean());
             }else{
-                intent.putExtra(KEY_ORDER, OrderPeerEnum.DEFAULT.toInt());
-                intent.putExtra(KEY_QUESTION_TO_ANSWER, QuestionToAnswerEnum.DEFAULT.toBoolean());
+                intent.putExtra(KEY_ORDER, OrderPeerEnum.KNOWLEDGE_ASCENDING.toInt());
+                intent.putExtra(KEY_QUESTION_TO_ANSWER, QuestionToAnswerEnum.QUESTION_TO_ANSWER.toBoolean());
             }
 
             startActivity(intent);

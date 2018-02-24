@@ -129,8 +129,8 @@ public class  FolderEntity implements Folder, Serializable {
         this.name = name;
         this.typeQuestion = typeQuesion;
         this.typeAnswer = typeAnswer;
-        this.order = OrderPeerEnum.DEFAULT;
-        this.questionToAnswer = QuestionToAnswerEnum.DEFAULT;
+        this.order = OrderPeerEnum.KNOWLEDGE_ASCENDING;
+        this.questionToAnswer = QuestionToAnswerEnum.ANSWER_TO_QUESTION;
         this.createdAt = new Date();
         this.updatedAt = new Date();
     }

@@ -49,7 +49,6 @@ public class RecordVoiceTest {
 
     @Test
     public void Record() throws Exception {;
-        String directory = RuntimeEnvironment.application.getExternalCacheDir().getAbsolutePath();
         mRecordVoice.startRecording();
         Thread.sleep(50);
         mRecordVoice.stopRecording();
