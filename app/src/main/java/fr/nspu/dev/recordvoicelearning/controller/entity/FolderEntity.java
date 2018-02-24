@@ -2,6 +2,7 @@ package fr.nspu.dev.recordvoicelearning.controller.entity;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 import java.io.Serializable;
@@ -124,6 +125,7 @@ public class  FolderEntity implements Folder, Serializable {
         this(0, "", "", "");
     }
 
+    @Ignore
     public FolderEntity(int id, String name, String typeQuesion, String typeAnswer) {
         this.id = id;
         this.name = name;

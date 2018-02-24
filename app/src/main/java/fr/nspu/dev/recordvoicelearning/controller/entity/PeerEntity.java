@@ -3,6 +3,7 @@ package fr.nspu.dev.recordvoicelearning.controller.entity;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
@@ -148,12 +149,10 @@ public class PeerEntity implements Peer, Serializable {
     }
 
     public PeerEntity() {
-        this.fileNameQuestion = "";
-        this.fileNameAnswer = "";
-        this.createdAt = new Date();
-        this.updatedAt = new Date();
+        this(0, 0, "", "", 0, 0);
     }
 
+    @Ignore
     public PeerEntity(int id, int folderId, String fileNameQuestion, String fileNameAnswer, int knowledge, int count) {
         this.id = id;
         this.folderId = folderId;
