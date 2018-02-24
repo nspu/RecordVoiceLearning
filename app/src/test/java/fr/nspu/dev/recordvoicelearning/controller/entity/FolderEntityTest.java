@@ -1,13 +1,10 @@
 package fr.nspu.dev.recordvoicelearning.controller.entity;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Date;
-
-import fr.nspu.dev.recordvoicelearning.model.Folder;
 import fr.nspu.dev.recordvoicelearning.utils.OrderPeerEnum;
+import fr.nspu.dev.recordvoicelearning.utils.QuestionToAnswerEnum;
 
 import static org.junit.Assert.*;
 
@@ -78,8 +75,8 @@ public class FolderEntityTest {
         long updated = mFolderEntity.getUpdatedAt().getTime();
         //wait 5 ms to be sure that time will be different for the update
         Thread.sleep(5);
-        mFolderEntity.setQuestionToAnswer(false);
-        assertFalse(mFolderEntity.isQuestionToAnswer());
+        mFolderEntity.setQuestionToAnswer(QuestionToAnswerEnum.ANSWER_TO_QUESTION);
+        assertFalse(mFolderEntity.getQuestionToAnswer().toBoolean());
         assertTrue(mFolderEntity.getUpdatedAt().getTime() > updated);
     }
 }

@@ -1,4 +1,4 @@
-package fr.nspu.dev.recordvoicelearning.view;
+package fr.nspu.dev.recordvoicelearning.view.activity;
 
 
 import android.databinding.DataBindingUtil;

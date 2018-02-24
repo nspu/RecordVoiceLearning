@@ -8,7 +8,7 @@
         <!--android:title="@string/pref_header_general" />-->
 
     <header
-        android:fragment="fr.nspu.dev.recordvoicelearning.view.SettingsActivity$PeerPreferenceFragment"
+        android:fragment="fr.nspu.dev.recordvoicelearning.view.activity.SettingsActivity$PeerPreferenceFragment"
         android:title="@string/pref_header_peer" />
 
 </preference-headers>

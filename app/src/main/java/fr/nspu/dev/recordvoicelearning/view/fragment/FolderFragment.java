@@ -25,12 +25,11 @@ import fr.nspu.dev.recordvoicelearning.RecordVoiceLearning;
 import fr.nspu.dev.recordvoicelearning.controller.entity.FolderEntity;
 import fr.nspu.dev.recordvoicelearning.controller.entity.PeerEntity;
 import fr.nspu.dev.recordvoicelearning.databinding.FragmentFolderBinding;
-import fr.nspu.dev.recordvoicelearning.model.Folder;
 import fr.nspu.dev.recordvoicelearning.utils.OrderPeerEnum;
 import fr.nspu.dev.recordvoicelearning.utils.QuestionToAnswerEnum;
 import fr.nspu.dev.recordvoicelearning.utils.callback.ClickCallback;
-import fr.nspu.dev.recordvoicelearning.view.ListenPeersActivity;
-import fr.nspu.dev.recordvoicelearning.view.RecordActivity;
+import fr.nspu.dev.recordvoicelearning.view.activity.ListenPeersActivity;
+import fr.nspu.dev.recordvoicelearning.view.activity.RecordActivity;
 import fr.nspu.dev.recordvoicelearning.view.adapter.PeerAdapter;
 import fr.nspu.dev.recordvoicelearning.viewmodel.FolderViewModel;
 
@@ -59,8 +58,8 @@ public class FolderFragment extends Fragment {
                 intent.putExtra(KEY_ORDER, folderEntity.getOrder().toInt());
                 intent.putExtra(KEY_QUESTION_TO_ANSWER, folderEntity.getQuestionToAnswer().toBoolean());
             }else{
-                intent.putExtra(KEY_ORDER, OrderPeerEnum.DEFAULT.toInt());
-                intent.putExtra(KEY_QUESTION_TO_ANSWER, QuestionToAnswerEnum.DEFAULT.toBoolean());
+                intent.putExtra(KEY_ORDER, OrderPeerEnum.KNOWLEDGE_ASCENDING.toInt());
+                intent.putExtra(KEY_QUESTION_TO_ANSWER, QuestionToAnswerEnum.QUESTION_TO_ANSWER.toBoolean());
             }
 
             startActivity(intent);

@@ -1,4 +1,4 @@
-package fr.nspu.dev.recordvoicelearning.view;
+package fr.nspu.dev.recordvoicelearning.view.activity;
 
 import android.Manifest;
 import android.content.pm.PackageManager;

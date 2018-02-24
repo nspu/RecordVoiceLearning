@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="fr.nspu.dev.recordvoicelearning.view.MainActivity"
+            android:name="fr.nspu.dev.recordvoicelearning.view.activity.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -24,13 +24,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="fr.nspu.dev.recordvoicelearning.view.RecordActivity" />
+        <activity android:name="fr.nspu.dev.recordvoicelearning.view.activity.RecordActivity" />
         <activity
-            android:name="fr.nspu.dev.recordvoicelearning.view.ListenPeersActivity"
+            android:name="fr.nspu.dev.recordvoicelearning.view.activity.ListenPeersActivity"
             android:label="@string/title_activity_listen_peers"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="fr.nspu.dev.recordvoicelearning.view.SettingsActivity"
+            android:name="fr.nspu.dev.recordvoicelearning.view.activity.SettingsActivity"
             android:label="@string/title_activity_folder_settings"></activity>
     </application>
 

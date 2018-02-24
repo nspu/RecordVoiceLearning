@@ -5,7 +5,7 @@ package fr.nspu.dev.recordvoicelearning.utils;
  */
 
 public enum QuestionToAnswerEnum {
-    DEFAULT(true),
+
     QUESTION_TO_ANSWER(true),
     ANSWER_TO_QUESTION(false);
 

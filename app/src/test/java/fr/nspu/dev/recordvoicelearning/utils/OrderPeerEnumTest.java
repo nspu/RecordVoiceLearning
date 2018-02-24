@@ -23,7 +23,7 @@ public class OrderPeerEnumTest {
         OrderPeerEnum orderPeerEnumCorrect0 = OrderPeerEnum.toOrderPeerEnum(0);
         OrderPeerEnum orderPeerEnumCorrect1 = OrderPeerEnum.toOrderPeerEnum(1);
 
-        assertEquals(orderPeerEnumNotInRange, OrderPeerEnum.DEFAULT);
+        assertEquals(orderPeerEnumNotInRange, OrderPeerEnum.KNOWLEDGE_ASCENDING);
         assertEquals(orderPeerEnumCorrect0, OrderPeerEnum.KNOWLEDGE_ASCENDING);
         assertEquals(orderPeerEnumCorrect1, OrderPeerEnum.KNOWLEDGE_DESCENDING);
     }
