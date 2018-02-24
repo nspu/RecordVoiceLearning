@@ -1,7 +1,5 @@
 package fr.nspu.dev.recordvoicelearning.utils;
 
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
@@ -17,7 +15,7 @@ public class RecordVoiceTest {
 
     RecordVoice mRecordVoice;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         String fileName = FILE_NAME;
         String directory = RuntimeEnvironment.application.getExternalCacheDir().getAbsolutePath();
@@ -32,7 +30,7 @@ public class RecordVoiceTest {
         };
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void defineMax() throws Exception {
         int max0 = mRecordVoice.defineMax(0, 0);
         int maxMaxValue = mRecordVoice.defineMax(0, mRecordVoice.MAX_VALUE_PROGRESSBAR);
@@ -47,8 +45,8 @@ public class RecordVoiceTest {
         assertEquals(maxIncrease, 110);
     }
 
-    @Test
-    public void Record() throws Exception {;
+    @org.junit.jupiter.api.Test
+    public void Record() throws Exception {
         String directory = RuntimeEnvironment.application.getExternalCacheDir().getAbsolutePath();
         mRecordVoice.startRecording();
         Thread.sleep(50);

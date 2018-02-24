@@ -1,5 +1,6 @@
 package fr.nspu.dev.recordvoicelearning.view.fragment;
 
+import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -63,6 +64,7 @@ public class AddFolderFragment extends Fragment {
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class DatabaseAsync extends AsyncTask<FolderEntity, Void, Void> {
 
         @Override

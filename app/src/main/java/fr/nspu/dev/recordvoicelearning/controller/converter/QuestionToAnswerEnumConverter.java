@@ -16,6 +16,6 @@ public class QuestionToAnswerEnumConverter {
 
     @TypeConverter
     public static boolean toBoolean(QuestionToAnswerEnum questionToAnswerEnum) {
-        return questionToAnswerEnum == null ? true : questionToAnswerEnum.toBoolean();
+        return questionToAnswerEnum == null || questionToAnswerEnum.toBoolean();
     }
 }

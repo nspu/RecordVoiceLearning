@@ -1,12 +1,5 @@
 package fr.nspu.dev.recordvoicelearning.controller.entity;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
-import java.util.Date;
-
-import fr.nspu.dev.recordvoicelearning.model.Folder;
 import fr.nspu.dev.recordvoicelearning.utils.OrderPeerEnum;
 import fr.nspu.dev.recordvoicelearning.utils.QuestionToAnswerEnum;
 
@@ -19,12 +12,12 @@ public class FolderEntityTest {
 
     FolderEntity mFolderEntity;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         mFolderEntity = new FolderEntity();
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void setId() throws Exception {
         long updated = mFolderEntity.getUpdatedAt().getTime();
         //wait 5 ms to be sure that time will be different for the update
@@ -34,7 +27,7 @@ public class FolderEntityTest {
         assertTrue(mFolderEntity.getUpdatedAt().getTime() > updated);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void setName() throws Exception {
         long updated = mFolderEntity.getUpdatedAt().getTime();
         //wait 5 ms to be sure that time will be different for the update
@@ -44,7 +37,7 @@ public class FolderEntityTest {
         assertTrue(mFolderEntity.getUpdatedAt().getTime() > updated);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void setTypeQuestion() throws Exception {
         long updated = mFolderEntity.getUpdatedAt().getTime();
         //wait 5 ms to be sure that time will be different for the update
@@ -64,7 +57,7 @@ public class FolderEntityTest {
         assertTrue(mFolderEntity.getUpdatedAt().getTime() > updated);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void setOrder() throws Exception {
         long updated = mFolderEntity.getUpdatedAt().getTime();
         //wait 5 ms to be sure that time will be different for the update
@@ -74,7 +67,7 @@ public class FolderEntityTest {
         assertTrue(mFolderEntity.getUpdatedAt().getTime() > updated);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void setQuestionToAnswer() throws Exception {
         long updated = mFolderEntity.getUpdatedAt().getTime();
         //wait 5 ms to be sure that time will be different for the update

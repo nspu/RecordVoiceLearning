@@ -1,7 +1,5 @@
 package fr.nspu.dev.recordvoicelearning.controller.converter;
 
-import org.junit.Test;
-
 import java.util.Date;
 
 import static org.junit.Assert.*;

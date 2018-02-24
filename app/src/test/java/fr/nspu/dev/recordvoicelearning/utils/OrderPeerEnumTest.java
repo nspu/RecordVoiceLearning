@@ -1,14 +1,12 @@
 package fr.nspu.dev.recordvoicelearning.utils;
 
-import org.junit.Test;
-
 import static org.junit.Assert.*;
 
 /**
  * Created by nspu on 18-02-22.
  */
 public class OrderPeerEnumTest {
-    @Test
+    @org.junit.jupiter.api.Test
     public void toInt() throws Exception {
         int i0 = OrderPeerEnum.KNOWLEDGE_ASCENDING.toInt();
         int i1 = OrderPeerEnum.KNOWLEDGE_DESCENDING.toInt();

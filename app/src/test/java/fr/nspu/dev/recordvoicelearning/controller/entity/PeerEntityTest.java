@@ -1,10 +1,5 @@
 package fr.nspu.dev.recordvoicelearning.controller.entity;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import fr.nspu.dev.recordvoicelearning.model.Peer;
-
 import static org.junit.Assert.*;
 
 /**
@@ -14,7 +9,7 @@ public class PeerEntityTest {
 
     PeerEntity mPeerEntity;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         mPeerEntity = new PeerEntity();
     }
@@ -49,7 +44,7 @@ public class PeerEntityTest {
         assertTrue(mPeerEntity.getUpdatedAt().getTime() > updated);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void setFileNameAnswer() throws Exception {
         long updated = mPeerEntity.getUpdatedAt().getTime();
         //wait 5 ms to be sure that time will be different for the update
@@ -59,7 +54,7 @@ public class PeerEntityTest {
         assertTrue(mPeerEntity.getUpdatedAt().getTime() > updated);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void setCount() throws Exception {
         long updated = mPeerEntity.getUpdatedAt().getTime();
         //wait 5 ms to be sure that time will be different for the update
@@ -69,7 +64,7 @@ public class PeerEntityTest {
         assertTrue(mPeerEntity.getUpdatedAt().getTime() > updated);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void setKnowledge() throws Exception {
         long updated = mPeerEntity.getUpdatedAt().getTime();
         //wait 5 ms to be sure that time will be different for the update
@@ -87,7 +82,7 @@ public class PeerEntityTest {
         assertEquals(mPeerEntity.getKnowledge(), 0);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void increaseKnowledge() throws Exception {
         long updated =0;
 

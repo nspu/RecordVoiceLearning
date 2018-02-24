@@ -29,10 +29,8 @@ import android.support.test.rule.ActivityTestRule;
 
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
-import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
-import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import java.util.concurrent.CountDownLatch;
@@ -82,13 +80,13 @@ public class MainActivityTest {
 
     }
 
-    @Before
+    @BeforeEach
     public void disableRecyclerViewAnimations() {
         // Disable RecyclerView animations
         EspressoTestUtil.disableAnimations(mActivityRule);
     }
 
-    @Before
+    @BeforeEach
     public void waitForDbCreation() throws Throwable {
         final CountDownLatch latch = new CountDownLatch(1);
         final LiveData<Boolean> databaseCreated = AppDatabase.getInstance(
@@ -114,7 +112,7 @@ public class MainActivityTest {
 
 
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void AllTest() throws Throwable{
         test1AddFolders();
         test3CheckFirstElementOnFolders();
