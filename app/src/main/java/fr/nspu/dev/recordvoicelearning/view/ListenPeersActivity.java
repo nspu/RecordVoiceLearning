@@ -29,10 +29,10 @@ import fr.nspu.dev.recordvoicelearning.databinding.FragmentListenPeersBinding;
 import fr.nspu.dev.recordvoicelearning.utils.OrderPeerEnum;
 import fr.nspu.dev.recordvoicelearning.utils.ListenVoice;
 import fr.nspu.dev.recordvoicelearning.utils.QuestionToAnswerEnum;
+import fr.nspu.dev.recordvoicelearning.view.fragment.FolderFragment;
 
 import static fr.nspu.dev.recordvoicelearning.view.fragment.FolderFragment.KEY_FOLDER_ID;
 import static fr.nspu.dev.recordvoicelearning.view.fragment.FolderFragment.KEY_ORDER;
-import static fr.nspu.dev.recordvoicelearning.view.fragment.FolderFragment.KEY_QUESTION_TO_ANSWER;
 
 public class ListenPeersActivity extends AppCompatActivity {
 
@@ -64,7 +64,7 @@ public class ListenPeersActivity extends AppCompatActivity {
 
         mOrder = OrderPeerEnum.toOrderPeerEnum(getIntent().getIntExtra(KEY_ORDER, 0));
         mQuestionToAnswer = QuestionToAnswerEnum.toQuestionToAnswerEnum(
-                getIntent().getBooleanExtra(KEY_QUESTION_TO_ANSWER, true));
+                getIntent().getBooleanExtra(FolderFragment.KEY_QUESTION_TO_ANSWER, true));
 
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         this.getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -72,7 +72,7 @@ public class ListenPeersActivity extends AppCompatActivity {
         new ListenPeersActivity.LoadFolderPeersTask().execute(folderId);
     }
 
-    private void init(){
+    private void init() {
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         /*
@@ -85,23 +85,57 @@ public class ListenPeersActivity extends AppCompatActivity {
      */
         SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        if(mOrder == OrderPeerEnum.KNOWLEDGE_ASCENDING)
-
-            if(mOrder == OrderPeerEnum.KNOWLEDGE_ASCENDING){
-                Collections.sort(mPeers, (o1, o2) -> Integer.compare(o1.getKnowledge(), o2.getKnowledge()));
-            }else{
-                Collections.sort(mPeers, (o1, o2) -> Integer.compare(o2.getKnowledge(), o1.getKnowledge()));
-            }
-
+        if (mOrder == OrderPeerEnum.KNOWLEDGE_ASCENDING) {
+            Collections.sort(mPeers, (o1, o2) -> Integer.compare(o1.getKnowledge(), o2.getKnowledge()));
+        } else {
+            Collections.sort(mPeers, (o1, o2) -> Integer.compare(o2.getKnowledge(), o1.getKnowledge()));
+        }
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        initViewPagerChangeListener();
+    }
+
+    /**
+     * If autoplay is TRUE, play the question at start  when the fragment is seen.
+     *
+     * Subscribe to SimpleOnPageChangeListener in ViewPager.
+     * When onPageSelected is called, call autoPlayStart with the setting selected.
+     */
+    private void initViewPagerChangeListener(){
+        ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.SimpleOnPageChangeListener() {
+            boolean firstCall = false;
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                //onPageSelected is not called when the first element is display but onPageScrolled yes
+                //So we call one time onPageSeleced with the first position
+                if(!firstCall){
+                    this.onPageSelected(0);
+                    firstCall = true;
+                }
+            }
+
+            //call when a fragment is displayed(except for the first element)
+            @Override
+            public void onPageSelected(int position) {
+                boolean isAutoPlay;
+                ListenPeerFragment f = (ListenPeerFragment)mViewPager.getAdapter().instantiateItem(mViewPager, position);
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+                isAutoPlay = sharedPreferences.getBoolean(getString(R.string.settings_auto_play), true);
+                f.autoPlayAtStart(isAutoPlay);
+            }
+
+        };
+        mViewPager.addOnPageChangeListener(pageChangeListener);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             finish();
             return true;
         }
@@ -109,17 +143,13 @@ public class ListenPeersActivity extends AppCompatActivity {
     }
 
     /**
-     * A placeholder fragment containing a simple view.
+     * A listenpeer fragment containing the view for listen and indicate if the answer is correct.
      */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String PEER_OBJECT = "PEER_OBJECT";
-        private static final String POSITION = "POSITION";
-        private static final String SIZE_PEERS = "SIZE_PEERS";
-        private static final String QUESTION_TO_ANSWER = "QUESTION_TO_ANSWER";
+    public static class ListenPeerFragment extends Fragment {
+        private static final String KEY_PEER_OBJECT = "peer_object";
+        private static final String KEY_POSITION = "position";
+        private static final String KEY_SIZE_PEERS = "size_peers";
+        private static final String KEY_QUESTION_TO_ANSWER = "question_to_answer    ";
 
         private FragmentListenPeersBinding mBinding;
         private PeerEntity mPeer;
@@ -127,57 +157,58 @@ public class ListenPeersActivity extends AppCompatActivity {
         private int mSize;
         private String mQuestionFile;
         private String mAnswerFile;
+        private ListenVoice mListenQuestion;
+        private ListenVoice mListenAnswer;
 
         /**
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderFragment newInstance(PeerEntity peer, int position, int size, QuestionToAnswerEnum questionToAnswer) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
+        public static ListenPeerFragment newInstance(PeerEntity peer, int position, int size, QuestionToAnswerEnum questionToAnswer) {
+            ListenPeerFragment fragment = new ListenPeerFragment();
+            fragment.getTag();
             Bundle args = new Bundle();
-            args.putSerializable(PEER_OBJECT, peer);
-            args.putInt(POSITION, position);
-            args.putInt(SIZE_PEERS, size);
-            args.putBoolean(QUESTION_TO_ANSWER, questionToAnswer.toBoolean());
+            args.putSerializable(KEY_PEER_OBJECT, peer);
+            args.putInt(KEY_POSITION, position);
+            args.putInt(KEY_SIZE_PEERS, size);
+            args.putBoolean(KEY_QUESTION_TO_ANSWER, questionToAnswer.toBoolean());
             fragment.setArguments(args);
             return fragment;
+        }
+
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setUserVisibleHint(false);
+
+
+            QuestionToAnswerEnum questionToAnswer =
+                    QuestionToAnswerEnum.toQuestionToAnswerEnum(
+                            getArguments().getBoolean(KEY_QUESTION_TO_ANSWER));
+            mPeer = (PeerEntity) getArguments().getSerializable(KEY_PEER_OBJECT);
+            mPosition = getArguments().getInt(KEY_POSITION);
+            mSize = getArguments().getInt(KEY_SIZE_PEERS);
+            if (questionToAnswer == QuestionToAnswerEnum.QUESTION_TO_ANSWER) {
+                mQuestionFile = mPeer.getFileNameQuestion();
+                mAnswerFile = mPeer.getFileNameAnswer();
+            } else {
+                mQuestionFile = mPeer.getFileNameAnswer();
+                mAnswerFile = mPeer.getFileNameQuestion();
+            }
         }
 
         @Override
         public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            QuestionToAnswerEnum questionToAnswer =
-                    QuestionToAnswerEnum.toQuestionToAnswerEnum(
-                            getArguments().getBoolean(QUESTION_TO_ANSWER));
-            mPeer = (PeerEntity) getArguments().getSerializable(PEER_OBJECT);
-            mPosition = getArguments().getInt(POSITION);
-            mSize = getArguments().getInt(SIZE_PEERS);
-
             mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_listen_peers, container, false);
 
             mBinding.tvPeerName.setText(getContext().getString(R.string.peer_idpeer, mPeer.getId()));
-            mBinding.tvPositionTotal.setText(getContext().getString(R.string._slash_, mPosition+1, mSize));
+            mBinding.tvPositionTotal.setText(getContext().getString(R.string._slash_, mPosition + 1, mSize));
             mBinding.sbKnowledge.setProgress(mPeer.getKnowledge());
 
-            if(questionToAnswer == QuestionToAnswerEnum.QUESTION_TO_ANSWER){
-                mQuestionFile = mPeer.getFileNameQuestion();
-                mAnswerFile = mPeer.getFileNameAnswer();
-            }else{
-                mQuestionFile = mPeer.getFileNameAnswer();
-                mAnswerFile = mPeer.getFileNameQuestion();
-            }
-
-
-            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-            boolean isAutoPlay = sharedPreferences.getBoolean(getString(R.string.settings_auto_play), true);
-
-            ListenVoice listenVoice = listen(mBinding.btnListenQuestion, mQuestionFile);
-
-            if(isAutoPlay){
-                listenVoice.startPlaying();
-            }
-
-            listen(mBinding.btnListenAnswer, mAnswerFile);
+            mListenQuestion = listen(mBinding.btnListenQuestion, mQuestionFile);
+            mListenAnswer = listen(mBinding.btnListenAnswer, mAnswerFile);
 
             mBinding.btnGood.setOnClickListener(v -> {
                 mPeer.increaseKnowledge();
@@ -189,25 +220,30 @@ public class ListenPeersActivity extends AppCompatActivity {
                 updatePeer();
             });
 
+
             return mBinding.getRoot();
         }
 
+        public void autoPlayAtStart(boolean isAutoPlay){
+            if (isAutoPlay) {
+                mListenQuestion.startPlaying();
+            }
+        }
 
-
-        private ListenVoice listen(Button button, String fileName){
+        private ListenVoice listen(Button button, String fileName) {
             String directoryFinal = getContext().getExternalFilesDir(null).getAbsolutePath();
             return new ListenVoice(button, fileName, directoryFinal);
         }
 
-        private void updatePeer(){
+        private void updatePeer() {
             new UpdatePeerTask().execute(mPeer);
         }
 
-        private void next(){
-            if(mSize > mPosition+1){
+        private void next() {
+            if (mSize > mPosition + 1) {
                 mBinding.sbKnowledge.setProgress(mPeer.getKnowledge());
-                mViewPager.setCurrentItem(mPosition+1);
-            }else{
+                mViewPager.setCurrentItem(mPosition + 1);
+            } else {
                 getActivity().finish();
             }
         }
@@ -220,8 +256,6 @@ public class ListenPeersActivity extends AppCompatActivity {
                 ((RecordVoiceLearning) getActivity().getApplication()).getDatabase()
                         .peerDao()
                         .updatePeersSync(peer);
-
-
                 return null;
             }
 
@@ -246,13 +280,12 @@ public class ListenPeersActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(mPeers.get(position), position, mPeers.size(), mQuestionToAnswer);
+            // Return a ListenPeerFragment (defined as a static inner class below).
+            return ListenPeerFragment.newInstance(mPeers.get(position), position, mPeers.size(), mQuestionToAnswer);
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
             return mPeers.size();
         }
     }
