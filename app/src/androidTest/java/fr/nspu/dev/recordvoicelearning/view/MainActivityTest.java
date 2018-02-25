@@ -29,10 +29,8 @@ import android.support.test.rule.ActivityTestRule;
 
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
-import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
-import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import java.util.concurrent.CountDownLatch;
@@ -78,20 +76,20 @@ public class MainActivityTest {
 
     public MainActivityTest() {
         // delete the database
-        InstrumentationRegistry.getTargetContext().deleteDatabase(AppDatabase.DATABASE_NAME);
+        InstrumentationRegistry.getTargetContext().deleteDatabase(AppDatabase.Companion.getDATABASE_NAME());
 
     }
 
-    @Before
+    @BeforeEach
     public void disableRecyclerViewAnimations() {
         // Disable RecyclerView animations
         EspressoTestUtil.disableAnimations(mActivityRule);
     }
 
-    @Before
+    @BeforeEach
     public void waitForDbCreation() throws Throwable {
         final CountDownLatch latch = new CountDownLatch(1);
-        final LiveData<Boolean> databaseCreated = AppDatabase.getInstance(
+        final LiveData<Boolean> databaseCreated = AppDatabase.Companion.getInstance(
                 InstrumentationRegistry.getTargetContext(), mExecutor)
                 .getDatabaseCreated();
         mActivityRule.runOnUiThread(new Runnable() {
@@ -114,7 +112,7 @@ public class MainActivityTest {
 
 
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void AllTest() throws Throwable{
         test1AddFolders();
         test3CheckFirstElementOnFolders();

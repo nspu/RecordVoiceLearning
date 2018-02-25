@@ -14,7 +14,6 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import fr.nspu.dev.recordvoicelearning.R;
@@ -43,7 +42,7 @@ public class MainActivityWithRecordTest {
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void mainActivityTest2() {
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
@@ -121,7 +120,7 @@ public class MainActivityWithRecordTest {
                 allOf(withId(R.id.name), withText("J"), withContentDescription("Name of the folder"),
                         childAtPosition(
                                 childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class),
+                                        IsInstanceOf.instanceOf(android.widget.FrameLayout.class),
                                         0),
                                 0),
                         isDisplayed()));
@@ -131,7 +130,7 @@ public class MainActivityWithRecordTest {
                 allOf(withId(R.id.type_question), withText("U"), withContentDescription("Name of the folder"),
                         childAtPosition(
                                 childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class),
+                                        IsInstanceOf.instanceOf(android.widget.FrameLayout.class),
                                         0),
                                 1),
                         isDisplayed()));
@@ -141,7 +140,7 @@ public class MainActivityWithRecordTest {
                 allOf(withId(R.id.type_answer), withText("U"), withContentDescription("Name of the folder"),
                         childAtPosition(
                                 childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class),
+                                        IsInstanceOf.instanceOf(android.widget.FrameLayout.class),
                                         0),
                                 2),
                         isDisplayed()));
@@ -420,7 +419,7 @@ public class MainActivityWithRecordTest {
                 allOf(withId(R.id.name_tv), withText("Pair : 2"), withContentDescription("peer"),
                         childAtPosition(
                                 childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class),
+                                        IsInstanceOf.instanceOf(android.widget.FrameLayout.class),
                                         0),
                                 0),
                         isDisplayed()));
@@ -430,7 +429,7 @@ public class MainActivityWithRecordTest {
                 allOf(withId(R.id.name_tv), withText("Pair : 1"), withContentDescription("peer"),
                         childAtPosition(
                                 childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class),
+                                        IsInstanceOf.instanceOf(android.widget.FrameLayout.class),
                                         0),
                                 0),
                         isDisplayed()));
@@ -467,7 +466,7 @@ public class MainActivityWithRecordTest {
                 allOf(withId(R.id.name_tv), withText("Pair : 1"), withContentDescription("peer"),
                         childAtPosition(
                                 childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class),
+                                        IsInstanceOf.instanceOf(android.widget.FrameLayout.class),
                                         0),
                                 0),
                         isDisplayed()));
@@ -477,7 +476,7 @@ public class MainActivityWithRecordTest {
                 allOf(withId(R.id.name_tv), withText("Pair : 1"), withContentDescription("peer"),
                         childAtPosition(
                                 childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class),
+                                        IsInstanceOf.instanceOf(android.widget.FrameLayout.class),
                                         0),
                                 0),
                         isDisplayed()));

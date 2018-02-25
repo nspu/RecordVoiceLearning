@@ -12,8 +12,8 @@ import static org.junit.Assert.*;
 public class QuestionToAnswerEnumConverterTest {
     @Test
     public void toQuestionToAnswerEnum() throws Exception {
-        QuestionToAnswerEnum questionToAnswerEnumTrue = QuestionToAnswerEnumConverter.toQuestionToAnswerEnum(true);
-        QuestionToAnswerEnum questionToAnswerEnumFalse = QuestionToAnswerEnumConverter.toQuestionToAnswerEnum(false);
+        QuestionToAnswerEnum questionToAnswerEnumTrue = QuestionToAnswerEnumConverter.Companion.toQuestionToAnswerEnum(true);
+        QuestionToAnswerEnum questionToAnswerEnumFalse = QuestionToAnswerEnumConverter.Companion.toQuestionToAnswerEnum(false);
 
         assertEquals(questionToAnswerEnumTrue, QuestionToAnswerEnum.QUESTION_TO_ANSWER);
         assertEquals(questionToAnswerEnumFalse, QuestionToAnswerEnum.ANSWER_TO_QUESTION);
@@ -21,9 +21,9 @@ public class QuestionToAnswerEnumConverterTest {
 
     @Test
     public void toBoolean() throws Exception {
-        boolean bTrue = QuestionToAnswerEnumConverter.toBoolean(QuestionToAnswerEnum.QUESTION_TO_ANSWER);
-        boolean bFalse = QuestionToAnswerEnumConverter.toBoolean(QuestionToAnswerEnum.ANSWER_TO_QUESTION);
-        boolean bDefault = QuestionToAnswerEnumConverter.toBoolean(null);
+        boolean bTrue = QuestionToAnswerEnumConverter.Companion.toBoolean(QuestionToAnswerEnum.QUESTION_TO_ANSWER);
+        boolean bFalse = QuestionToAnswerEnumConverter.Companion.toBoolean(QuestionToAnswerEnum.ANSWER_TO_QUESTION);
+        boolean bDefault = QuestionToAnswerEnumConverter.Companion.toBoolean(null);
 
         assertEquals(bTrue, true);
         assertEquals(bFalse, false);

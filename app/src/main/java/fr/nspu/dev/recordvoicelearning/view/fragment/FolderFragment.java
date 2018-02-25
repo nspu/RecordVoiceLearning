@@ -1,6 +1,7 @@
 package fr.nspu.dev.recordvoicelearning.view.fragment;
 
 
+import android.annotation.SuppressLint;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -189,6 +190,7 @@ public class FolderFragment extends Fragment {
         return fragment;
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class UpdateFolderAsync extends AsyncTask<FolderEntity, Void, Void> {
         @Override
         protected Void doInBackground(FolderEntity... folderEntities) {

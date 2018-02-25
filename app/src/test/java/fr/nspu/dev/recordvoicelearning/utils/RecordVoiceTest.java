@@ -47,8 +47,9 @@ public class RecordVoiceTest {
         assertEquals(maxIncrease, 110);
     }
 
+
     @Test
-    public void Record() throws Exception {;
+    public void Record() throws Exception {
         mRecordVoice.startRecording();
         Thread.sleep(50);
         mRecordVoice.stopRecording();
