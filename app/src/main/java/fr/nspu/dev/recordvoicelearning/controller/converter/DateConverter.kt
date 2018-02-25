@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-package fr.nspu.dev.recordvoicelearning.controller.converter;
+package fr.nspu.dev.recordvoicelearning.controller.converter
 
-import android.arch.persistence.room.TypeConverter;
+import android.arch.persistence.room.TypeConverter
 
-import java.util.Date;
+import java.util.Date
 
-public class DateConverter {
+object DateConverter {
     @TypeConverter
-    public static Date toDate(Long timestamp) {
-        return timestamp == null ? null : new Date(timestamp);
+    fun toDate(timestamp: Long?): Date? {
+        return if (timestamp == null) null else Date(timestamp)
     }
 
     @TypeConverter
-    public static Long toTimestamp(Date date) {
-        return date == null ? null : date.getTime();
+    fun toTimestamp(date: Date?): Long? {
+        return date?.time
     }
 }

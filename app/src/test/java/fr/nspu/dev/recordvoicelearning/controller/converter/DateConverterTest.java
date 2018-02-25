@@ -13,8 +13,8 @@ public class DateConverterTest {
         Date now  = new Date();
         Long nowTimestamp = now.getTime();
 
-        Date dateNull = DateConverter.toDate(null);
-        Date dateEqual = DateConverter.toDate(nowTimestamp);
+        Date dateNull = DateConverter.INSTANCE.toDate(null);
+        Date dateEqual = DateConverter.INSTANCE.toDate(nowTimestamp);
 
         assertNull(dateNull);
         assertEquals(dateEqual, now);
@@ -25,8 +25,8 @@ public class DateConverterTest {
         Date now  = new Date();
         Long nowTimestamp = now.getTime();
 
-        Long timestampNull = DateConverter.toTimestamp(null);
-        Long timestampEqual = DateConverter.toTimestamp(now);
+        Long timestampNull = DateConverter.INSTANCE.toTimestamp(null);
+        Long timestampEqual = DateConverter.INSTANCE.toTimestamp(now);
 
         assertNull(timestampNull);
         assertEquals(timestampEqual, nowTimestamp);

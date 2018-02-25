@@ -10,9 +10,9 @@ import static org.junit.Assert.*;
 public class OrderPeerEnumConverterTest {
     @Test
     public void toOrderPeerEnum() throws Exception {
-        OrderPeerEnum orderPeerEnumNotInRange = OrderPeerEnumConverter.toOrderPeerEnum(5);
-        OrderPeerEnum orderPeerEnumCorrect0 = OrderPeerEnumConverter.toOrderPeerEnum(0);
-        OrderPeerEnum orderPeerEnumCorrect1 = OrderPeerEnumConverter.toOrderPeerEnum(1);
+        OrderPeerEnum orderPeerEnumNotInRange = OrderPeerEnumConverter.INSTANCE.toOrderPeerEnum(5);
+        OrderPeerEnum orderPeerEnumCorrect0 = OrderPeerEnumConverter.INSTANCE.toOrderPeerEnum(0);
+        OrderPeerEnum orderPeerEnumCorrect1 = OrderPeerEnumConverter.INSTANCE.toOrderPeerEnum(1);
 
         assertEquals(orderPeerEnumNotInRange, OrderPeerEnum.DEFAULT);
         assertEquals(orderPeerEnumCorrect0, OrderPeerEnum.KNOWLEDGE_ASCENDING);
@@ -21,9 +21,9 @@ public class OrderPeerEnumConverterTest {
 
     @Test
     public void toInt() throws Exception {
-        int i0 = OrderPeerEnumConverter.toInt(OrderPeerEnum.KNOWLEDGE_ASCENDING);
-        int i1 = OrderPeerEnumConverter.toInt(OrderPeerEnum.KNOWLEDGE_DESCENDING);
-        int iDefault = OrderPeerEnumConverter.toInt(null);
+        int i0 = OrderPeerEnumConverter.INSTANCE.toInt(OrderPeerEnum.KNOWLEDGE_ASCENDING);
+        int i1 = OrderPeerEnumConverter.INSTANCE.toInt(OrderPeerEnum.KNOWLEDGE_DESCENDING);
+        int iDefault = OrderPeerEnumConverter.INSTANCE.toInt(null);
 
         assertEquals(i0, 0);
         assertEquals(i1, 1);

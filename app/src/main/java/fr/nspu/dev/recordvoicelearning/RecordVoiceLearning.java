@@ -38,7 +38,7 @@ public class RecordVoiceLearning extends Application {
     }
 
     public AppDatabase getDatabase() {
-        return AppDatabase.getInstance(this, mAppExecutors);
+        return AppDatabase.Companion.getInstance(this, mAppExecutors);
     }
 
     public DataRepository getRepository() {
