@@ -1,6 +1,7 @@
 package fr.nspu.dev.recordvoicelearning.view.activity;
 
 
+import android.annotation.SuppressLint;
 import android.databinding.DataBindingUtil;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -161,6 +162,7 @@ public class RecordActivity extends AppCompatActivity {
     }
 
 
+    @SuppressLint("StaticFieldLeak")
     private class LoadFolderTask extends AsyncTask<Integer, Void, Void> {
 
         @Override
@@ -179,6 +181,7 @@ public class RecordActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class SavePeerTask extends AsyncTask<PeerEntity, Void, Void> {
 
 

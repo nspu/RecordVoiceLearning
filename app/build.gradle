@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 27
@@ -9,6 +10,12 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
     }
     buildTypes {
         release {
@@ -57,7 +64,6 @@ dependencies {
 
     //test//
     testImplementation 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:1.10.19'
     testImplementation "org.robolectric:robolectric:3.7.1"
 
     // Android Testing Support Library's runner and rules
@@ -78,6 +84,10 @@ dependencies {
     testImplementation 'android.arch.core:core-testing:1.1.0'
     // Test helpers for Room
     testImplementation 'android.arch.persistence.room:testing:1.0.0'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }
 
 
