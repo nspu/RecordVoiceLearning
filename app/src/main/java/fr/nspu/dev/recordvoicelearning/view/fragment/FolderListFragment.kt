@@ -105,19 +105,18 @@ class FolderListFragment : Fragment() {
 
 
     @SuppressLint("StaticFieldLeak")
-    private inner class DatabaseAsync : AsyncTask<FolderEntity, Void, Void>() {
+    private inner class DatabaseAsync : AsyncTask<FolderEntity, Void, Unit>() {
 
 
-        override fun doInBackground(vararg folderEntities: FolderEntity): Void? {
+        override fun doInBackground(vararg folderEntities: FolderEntity) {
             (activity!!.application as RecordVoiceLearning).database.folderDao().deleteFolders(folderEntities[0])
-            return null
         }
 
 
-        override fun onPostExecute(aVoid: Void) {
+        override fun onPostExecute(result: Unit) {
             Snackbar.make(this@FolderListFragment.activity!!.findViewById(R.id.fragment_container), R.string.folder_deleted, Snackbar.LENGTH_SHORT)
                     .setAction("Action", null).show()
-            super.onPostExecute(aVoid)
+            super.onPostExecute(result)
         }
     }
 

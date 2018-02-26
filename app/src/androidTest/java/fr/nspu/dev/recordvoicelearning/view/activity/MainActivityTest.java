@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package fr.nspu.dev.recordvoicelearning.view;
+package fr.nspu.dev.recordvoicelearning.view.activity;
 
 
 import android.arch.core.executor.testing.CountingTaskExecutorRule;
@@ -26,6 +26,7 @@ import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
+import android.support.test.runner.AndroidJUnit4;
 
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
@@ -33,6 +34,7 @@ import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
 import java.util.concurrent.CountDownLatch;
@@ -56,7 +58,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.withContentDesc
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@RunWith(AndroidJUnit4.class)
 public class MainActivityTest {
 
     private final String NAME = "English - French";
@@ -79,7 +82,6 @@ public class MainActivityTest {
     public MainActivityTest() {
         // delete the database
         InstrumentationRegistry.getTargetContext().deleteDatabase(AppDatabase.Companion.getDATABASE_NAME());
-
     }
 
     @Before

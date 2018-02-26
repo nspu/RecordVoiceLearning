@@ -9,11 +9,11 @@ import fr.nspu.dev.recordvoicelearning.utils.QuestionToAnswerEnum
  */
 
 
-object QuestionToAnswerEnumConverter {
+class QuestionToAnswerEnumConverter {
     @TypeConverter
-    fun toQuestionToAnswerEnum(b: Boolean?): QuestionToAnswerEnum = QuestionToAnswerEnum.toQuestionToAnswerEnum(b!!)
+    fun toQuestionToAnswerEnum(b: Boolean?): QuestionToAnswerEnum = QuestionToAnswerEnum.toQuestionToAnswerEnum(b)
 
     @TypeConverter
-    fun toBoolean(questionToAnswerEnum: QuestionToAnswerEnum?): Boolean? = questionToAnswerEnum?.let { questionToAnswerEnum.toBoolean() }
+    fun toBoolean(questionToAnswerEnum: QuestionToAnswerEnum?): Boolean? = questionToAnswerEnum?.let { it.toBoolean() }
 }
 

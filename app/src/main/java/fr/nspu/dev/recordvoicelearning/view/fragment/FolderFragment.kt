@@ -9,6 +9,7 @@ import android.databinding.DataBindingUtil
 import android.os.AsyncTask
 import android.support.v4.app.Fragment
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -17,8 +18,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import android.widget.ToggleButton
-
-import java.util.Collections
 
 import fr.nspu.dev.recordvoicelearning.R
 import fr.nspu.dev.recordvoicelearning.RecordVoiceLearning
@@ -32,6 +31,7 @@ import fr.nspu.dev.recordvoicelearning.view.activity.ListenPeersActivity
 import fr.nspu.dev.recordvoicelearning.view.activity.RecordActivity
 import fr.nspu.dev.recordvoicelearning.view.adapter.PeerAdapter
 import fr.nspu.dev.recordvoicelearning.viewmodel.FolderViewModel
+import java.util.*
 
 class FolderFragment : Fragment() {
 
@@ -63,7 +63,7 @@ class FolderFragment : Fragment() {
                     ListenPeersActivity::class.java
             )
             intent.putExtra(KEY_FOLDER_ID, arguments!!.getInt(KEY_FOLDER_ID))
-            val folderEntity = mBinding!!.folderViewModel.folder.get()
+            val folderEntity = mBinding!!.folderViewModel!!.folder.get()
             if (folderEntity != null) {
                 intent.putExtra(KEY_ORDER, folderEntity.order!!.toInt())
                 intent.putExtra(KEY_QUESTION_TO_ANSWER, folderEntity.questionToAnswer!!.toBoolean())
@@ -76,7 +76,7 @@ class FolderFragment : Fragment() {
         }
 
         mBinding!!.btnOrder.setOnClickListener { v:View? ->
-            val folderEntity = mBinding!!.folderViewModel.folder.get()
+            val folderEntity = mBinding!!.folderViewModel!!.folder.get()
             val isChecked = (v as ToggleButton).isChecked
             if (folderEntity != null && isChecked) {
                 folderEntity.order = OrderPeerEnum.KNOWLEDGE_ASCENDING
@@ -89,7 +89,7 @@ class FolderFragment : Fragment() {
 
 
         mBinding!!.btnQuestionToAnswer.setOnCheckedChangeListener { buttonView:View?, isChecked:Boolean ->
-            val folderEntity = mBinding!!.folderViewModel.folder.get()
+            val folderEntity = mBinding!!.folderViewModel!!.folder.get()
             if (folderEntity != null && isChecked) {
                 folderEntity.questionToAnswer = QuestionToAnswerEnum.QUESTION_TO_ANSWER
                 UpdateFolderAsync().execute(folderEntity)
@@ -169,18 +169,21 @@ class FolderFragment : Fragment() {
                 }
             })
         })
-
-
     }
 
     @SuppressLint("StaticFieldLeak")
-    private inner class UpdateFolderAsync : AsyncTask<FolderEntity, Void, Void>() {
-        override fun doInBackground(vararg folderEntities: FolderEntity): Void? {
-            val a = (activity!!.application as RecordVoiceLearning)
+    private inner class UpdateFolderAsync : AsyncTask<FolderEntity, Void, Unit>() {
+        override fun doInBackground(vararg folderEntities: FolderEntity) {
+            var folderEntity = folderEntities[0]
+            (activity!!.application as RecordVoiceLearning)
                     .database
                     .folderDao()
-                    .updateFoldersSync(folderEntities[0])
-            return null
+                    .updateFoldersSync(folderEntity)
+        }
+
+        override fun onPostExecute(result: Unit?) {
+            super.onPostExecute(result)
+
         }
     }
 
@@ -198,6 +201,5 @@ class FolderFragment : Fragment() {
             return fragment
         }
     }
-
-
 }
+

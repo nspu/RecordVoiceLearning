@@ -56,7 +56,7 @@ class RecordActivity : AppCompatActivity() {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_record)
         mBinding!!.exitBtn.setOnClickListener { v: View -> exit() }
 
-        mBinding!!.recordAnotherBtn.setOnClickListener { v: View -> recordAnAnother() }
+        mBinding!!.recordAnotherBtn.setOnClickListener { _: View -> recordAnAnother() }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -68,7 +68,7 @@ class RecordActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (!mPeer!!.fileNameAnswer!!.isEmpty() || !mPeer!!.fileNameQuestion!!.isEmpty()) {
+        if (mPeer!!.fileNameAnswer != null || mPeer!!.fileNameQuestion != null) {
             Snackbar.make(mBinding!!.llRecord, "Voulez-vous vraiment quitter?", Snackbar.LENGTH_LONG)
                     .setAction("Quitter") { v -> super.onBackPressed() }.show()
         } else {
@@ -106,8 +106,7 @@ class RecordActivity : AppCompatActivity() {
 
         ListenVoice(mBinding!!.listenAnswerBtn, fileNameAnswer, directory)
 
-        mPeer = PeerEntity()
-        mPeer!!.folderId = mFolder!!.id
+        mPeer = PeerEntity(mFolder!!.id)
         mBinding!!.peer = mPeer
     }
 
@@ -157,36 +156,32 @@ class RecordActivity : AppCompatActivity() {
 
 
     @SuppressLint("StaticFieldLeak")
-    private inner class LoadFolderTask : AsyncTask<Int, Void, Void>() {
+    private inner class LoadFolderTask : AsyncTask<Int, Void, Unit>() {
 
-        protected override fun doInBackground(vararg integers: Int?): Void? {
+        override fun doInBackground(vararg integers: Int?) {
             mFolder = (application as RecordVoiceLearning).database
                     .folderDao()
                     .loadFolderByIdSync(integers[0]!!)
-
-            return null
         }
 
-        override fun onPostExecute(aVoid: Void) {
-            super.onPostExecute(aVoid)
+        override fun onPostExecute(result: Unit) {
+            super.onPostExecute(result)
             init()
         }
     }
 
     @SuppressLint("StaticFieldLeak")
-    private inner class SavePeerTask : AsyncTask<PeerEntity, Void, Void>() {
+    private inner class SavePeerTask : AsyncTask<PeerEntity, Void, Unit>() {
 
 
-        override fun doInBackground(vararg peers: PeerEntity): Void? {
+        override fun doInBackground(vararg peers: PeerEntity) {
             (application as RecordVoiceLearning).database
                     .peerDao()
                     .insertPeerSync(peers[0])
-
-            return null
         }
 
-        override fun onPostExecute(aVoid: Void) {
-            super.onPostExecute(aVoid)
+        override fun onPostExecute(result: Unit) {
+            super.onPostExecute(result)
             if (mExit) {
                 this@RecordActivity.finish()
             } else {

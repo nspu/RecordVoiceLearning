@@ -35,14 +35,14 @@ public class RecordVoiceTest {
     @Test
     public void defineMax() throws Exception {
         int max0 = mRecordVoice.defineMax(0, 0);
-        int maxMaxValue = mRecordVoice.defineMax(0, mRecordVoice.MAX_VALUE_PROGRESSBAR);
-        int maxHigherMaxValue = mRecordVoice.defineMax(0, mRecordVoice.MAX_VALUE_PROGRESSBAR + 500);
+        int maxMaxValue = mRecordVoice.defineMax(0, mRecordVoice.getMAX_VALUE_PROGRESSBAR());
+        int maxHigherMaxValue = mRecordVoice.defineMax(0, mRecordVoice.getMAX_VALUE_PROGRESSBAR() + 500);
         int maxDecremente = mRecordVoice.defineMax(1000, 100);
         int maxIncrease = mRecordVoice.defineMax(90, 110);
 
         assertEquals(max0, 0);
-        assertEquals(maxMaxValue, mRecordVoice.MAX_VALUE_PROGRESSBAR);
-        assertEquals(maxHigherMaxValue, mRecordVoice.MAX_VALUE_PROGRESSBAR);
+        assertEquals(maxMaxValue, mRecordVoice.getMAX_VALUE_PROGRESSBAR());
+        assertEquals(maxHigherMaxValue, mRecordVoice.getMAX_VALUE_PROGRESSBAR());
         assertEquals(maxDecremente, 999);
         assertEquals(maxIncrease, 110);
     }

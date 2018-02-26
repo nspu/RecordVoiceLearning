@@ -35,9 +35,8 @@ class RecordDialog(context: Context) : Dialog(context) {
                 true)
     }
 
-    override fun onCreate(savedInstanceState: Bundle) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mBinding.root)
-
     }
 }

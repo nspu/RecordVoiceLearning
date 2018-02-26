@@ -57,17 +57,14 @@ class AddFolderFragment : Fragment() {
     }
 
     @SuppressLint("StaticFieldLeak")
-    private inner class DatabaseAsync : AsyncTask<FolderEntity, Void, Void>() {
+    private inner class DatabaseAsync : AsyncTask<FolderEntity, Void, Unit>() {
 
-        override fun doInBackground(vararg folderEntities: FolderEntity): Void? {
+        override fun doInBackground(vararg folderEntities: FolderEntity) {
             (activity!!.application as RecordVoiceLearning).database.folderDao().insertFolderSync(folderEntities[0])
-            return null
         }
 
-
-        override fun onPostExecute(aVoid: Void) {
-            super.onPostExecute(aVoid)
-
+        override fun onPostExecute(result: Unit?) {
+            super.onPostExecute(result)
             Snackbar.make(this@AddFolderFragment.activity!!.findViewById(R.id.fragment_container), R.string.folder_add, Snackbar.LENGTH_SHORT)
                     .setAction("Action", null).show()
 
@@ -76,7 +73,6 @@ class AddFolderFragment : Fragment() {
     }
 
     companion object {
-
         val TAG = "AddFolderFragment"
     }
 

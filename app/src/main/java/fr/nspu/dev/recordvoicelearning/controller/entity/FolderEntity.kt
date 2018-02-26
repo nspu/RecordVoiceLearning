@@ -3,6 +3,8 @@ package fr.nspu.dev.recordvoicelearning.controller.entity
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
+import android.os.Parcel
+import android.os.Parcelable
 
 import java.io.Serializable
 import java.util.Date
@@ -16,12 +18,20 @@ import fr.nspu.dev.recordvoicelearning.utils.QuestionToAnswerEnum
  */
 
 @Entity(tableName = "folders")
-data class FolderEntity(
-        @ColumnInfo(name = "id") @PrimaryKey(autoGenerate = true) override var id: Int? ,
-        @ColumnInfo(name = "name") override var name: String?,
-        @ColumnInfo(name = "type_question") override var typeQuestion: String?,
-        @ColumnInfo(name = "type_answer") override var typeAnswer: String?
-        ) : Folder, Serializable {
+class FolderEntity() : Folder {
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    override var id: Int? = null
+
+    @ColumnInfo(name = "name")
+    override var name: String? = null
+
+    @ColumnInfo(name = "type_question")
+    override var typeQuestion: String? = null
+
+    @ColumnInfo(name = "type_answer")
+    override var typeAnswer: String? = null
 
     @ColumnInfo(name = "order")
     override var order: OrderPeerEnum? = OrderPeerEnum.KNOWLEDGE_ASCENDING
@@ -35,7 +45,10 @@ data class FolderEntity(
     @ColumnInfo(name = "updated_at")
     override var updatedAt: Date? = null
 
-
-    constructor() : this(0, "", "", "") {}
-
+    constructor(_id: Int, _name: String, _typeQuestion: String, _typeAnswer: String) : this() {
+        id = _id
+        name = _name
+        typeQuestion = _typeQuestion
+        typeAnswer = _typeAnswer
+    }
 }

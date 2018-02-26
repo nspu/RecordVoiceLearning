@@ -56,7 +56,7 @@ dependencies {
     implementation "android.arch.lifecycle:livedata:$lifecycle_version"
     implementation "android.arch.lifecycle:viewmodel:$lifecycle_version"
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
-//    kapt 'com.android.databinding:compiler:3.0.0'
+    kapt 'com.android.databinding:compiler:3.0.0'
 
     //database
     compile "android.arch.persistence.room:runtime:$arch_room_version"
@@ -72,6 +72,7 @@ dependencies {
     androidTestImplementation "android.arch.core:core-testing:1.1.0"
     androidTestImplementation "com.android.support.test:runner:1.0.1"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso_version"
+    androidTestCompile"com.android.support.test.espresso:espresso-core:$espresso_version"
     androidTestImplementation("com.android.support.test.espresso:espresso-contrib:$espresso_version") {
         exclude module: "support-annotations"
         exclude module: "support-v4"

@@ -10,26 +10,28 @@ import org.junit.Assert.*
  * Created by nspu on 18-02-23.
  */
 class QuestionToAnswerEnumConverterTest {
+    val questionToAnswerEnumConverter = QuestionToAnswerEnumConverter()
+
     @Test
     @Throws(Exception::class)
     fun toQuestionToAnswerEnum() {
-        val questionToAnswerEnumTrue = QuestionToAnswerEnumConverter.toQuestionToAnswerEnum(true)
-        val questionToAnswerEnumFalse = QuestionToAnswerEnumConverter.toQuestionToAnswerEnum(false)
+        val questionToAnswerEnumTrue = questionToAnswerEnumConverter.toQuestionToAnswerEnum(true)
+        val questionToAnswerEnumFalse = questionToAnswerEnumConverter.toQuestionToAnswerEnum(false)
+        val questionToAnswerEnumFalseDefault = questionToAnswerEnumConverter.toQuestionToAnswerEnum(null)
 
         assertEquals(questionToAnswerEnumTrue, QuestionToAnswerEnum.QUESTION_TO_ANSWER)
         assertEquals(questionToAnswerEnumFalse, QuestionToAnswerEnum.ANSWER_TO_QUESTION)
+        assertEquals(questionToAnswerEnumFalseDefault, QuestionToAnswerEnum.QUESTION_TO_ANSWER)
     }
 
     @Test
     @Throws(Exception::class)
     fun toBoolean() {
-        val bTrue = QuestionToAnswerEnumConverter.toBoolean(QuestionToAnswerEnum.QUESTION_TO_ANSWER)!!
-        val bFalse = QuestionToAnswerEnumConverter.toBoolean(QuestionToAnswerEnum.ANSWER_TO_QUESTION)!!
-        val bDefault = QuestionToAnswerEnumConverter.toBoolean(null)!!
+        val bTrue = questionToAnswerEnumConverter.toBoolean(QuestionToAnswerEnum.QUESTION_TO_ANSWER)
+        val bFalse = questionToAnswerEnumConverter.toBoolean(QuestionToAnswerEnum.ANSWER_TO_QUESTION)
 
         assertEquals(bTrue, true)
         assertEquals(bFalse, false)
-        assertEquals(bDefault, true)
     }
 
 }

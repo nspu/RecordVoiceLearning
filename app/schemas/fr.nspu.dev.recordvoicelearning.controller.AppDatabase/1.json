@@ -2,36 +2,12 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "11bf7b9fdb9087491808691ce8538a5d",
+    "identityHash": "3429adff5a767600e87f46c159fe4872",
     "entities": [
       {
         "tableName": "folders",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`order` INTEGER, `question_to_answer` INTEGER, `created_at` INTEGER, `updated_at` INTEGER, `id` INTEGER PRIMARY KEY AUTOINCREMENT, `name` TEXT, `type_question` TEXT, `type_answer` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `name` TEXT, `type_question` TEXT, `type_answer` TEXT, `order` INTEGER, `question_to_answer` INTEGER, `created_at` INTEGER, `updated_at` INTEGER)",
         "fields": [
-          {
-            "fieldPath": "order",
-            "columnName": "order",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
-            "fieldPath": "questionToAnswer",
-            "columnName": "question_to_answer",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
-            "fieldPath": "createdAt",
-            "columnName": "created_at",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
-            "fieldPath": "updatedAt",
-            "columnName": "updated_at",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
           {
             "fieldPath": "id",
             "columnName": "id",
@@ -55,6 +31,30 @@
             "columnName": "type_answer",
             "affinity": "TEXT",
             "notNull": false
+          },
+          {
+            "fieldPath": "order",
+            "columnName": "order",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "questionToAnswer",
+            "columnName": "question_to_answer",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -68,26 +68,8 @@
       },
       {
         "tableName": "peers",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`created_at` INTEGER, `updated_at` INTEGER, `knowledge` INTEGER, `id` INTEGER PRIMARY KEY AUTOINCREMENT, `folder_Id` INTEGER, `file_name_question` TEXT, `file_name_answer` TEXT, `_knowledge` INTEGER, `count` INTEGER, FOREIGN KEY(`folder_Id`) REFERENCES `folders`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `folder_Id` INTEGER, `file_name_question` TEXT, `file_name_answer` TEXT, `knowledge` INTEGER, `count` INTEGER, `created_at` INTEGER, `updated_at` INTEGER, FOREIGN KEY(`folder_Id`) REFERENCES `folders`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
-          {
-            "fieldPath": "createdAt",
-            "columnName": "created_at",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
-            "fieldPath": "updatedAt",
-            "columnName": "updated_at",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
-            "fieldPath": "knowledge",
-            "columnName": "knowledge",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
           {
             "fieldPath": "id",
             "columnName": "id",
@@ -113,14 +95,26 @@
             "notNull": false
           },
           {
-            "fieldPath": "_knowledge",
-            "columnName": "_knowledge",
+            "fieldPath": "knowledge",
+            "columnName": "knowledge",
             "affinity": "INTEGER",
             "notNull": false
           },
           {
             "fieldPath": "count",
             "columnName": "count",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
             "affinity": "INTEGER",
             "notNull": false
           }
@@ -158,7 +152,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"11bf7b9fdb9087491808691ce8538a5d\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"3429adff5a767600e87f46c159fe4872\")"
     ]
   }
 }

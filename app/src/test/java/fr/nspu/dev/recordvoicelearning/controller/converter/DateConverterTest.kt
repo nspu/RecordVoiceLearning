@@ -5,19 +5,24 @@ import org.junit.Test
 import java.util.Date
 
 import org.junit.Assert.*
+import org.junit.BeforeClass
 
 /**
  * Created by nspu on 18-02-22.
  */
 class DateConverterTest {
+
+    val dateConverter = DateConverter()
+
     @Test
     @Throws(Exception::class)
     fun toDate() {
         val now = Date()
         val nowTimestamp = now.time
 
-        val dateNull = DateConverter.toDate(null)
-        val dateEqual = DateConverter.toDate(nowTimestamp)
+
+        val dateNull = dateConverter.toDate(null)
+        val dateEqual = dateConverter.toDate(nowTimestamp)
 
         assertNull(dateNull)
         assertEquals(dateEqual, now)
@@ -29,8 +34,8 @@ class DateConverterTest {
         val now = Date()
         val nowTimestamp = now.time
 
-        val timestampNull = DateConverter.toTimestamp(null)
-        val timestampEqual = DateConverter.toTimestamp(now)
+        val timestampNull = dateConverter.toTimestamp(null)
+        val timestampEqual = dateConverter.toTimestamp(now)
 
         assertNull(timestampNull)
         assertEquals(timestampEqual, nowTimestamp)

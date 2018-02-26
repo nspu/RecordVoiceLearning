@@ -9,10 +9,10 @@ import fr.nspu.dev.recordvoicelearning.utils.OrderPeerEnum
  * Created by nspu on 18-02-22.
  */
 
-object OrderPeerEnumConverter {
+class OrderPeerEnumConverter {
     @TypeConverter
-    fun toOrderPeerEnum(id: Int?): OrderPeerEnum = OrderPeerEnum.toOrderPeerEnum(id!!)
+    fun toOrderPeerEnum(id: Int): OrderPeerEnum = OrderPeerEnum.toOrderPeerEnum(id)
 
     @TypeConverter
-    fun toInt(orderPeerEnum: OrderPeerEnum?): Int? = orderPeerEnum?.let { 0 }
+    fun toInt(orderPeerEnum: OrderPeerEnum?): Int = orderPeerEnum.let { it!!.toInt() }
 }

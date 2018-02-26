@@ -216,18 +216,17 @@ class ListenPeersActivity : AppCompatActivity() {
         }
 
         @SuppressLint("StaticFieldLeak")
-        private inner class UpdatePeerTask : AsyncTask<PeerEntity, Void, Void>() {
+        private inner class UpdatePeerTask : AsyncTask<PeerEntity, Void, Unit>() {
 
-            override fun doInBackground(vararg peer: PeerEntity): Void? {
+            override fun doInBackground(vararg peer: PeerEntity){
 
                 (activity!!.application as RecordVoiceLearning).database
                         .peerDao()
                         .updatePeersSync(*peer)
-                return null
             }
 
-            override fun onPostExecute(aVoid: Void) {
-                super.onPostExecute(aVoid)
+            override fun onPostExecute(result: Unit) {
+                super.onPostExecute(result)
                 next()
             }
         }
@@ -274,17 +273,16 @@ class ListenPeersActivity : AppCompatActivity() {
     }
 
     @SuppressLint("StaticFieldLeak")
-    private inner class LoadFolderPeersTask : AsyncTask<Int, Void, Void>() {
+    private inner class LoadFolderPeersTask : AsyncTask<Int, Void, Unit>() {
 
-         override fun doInBackground(vararg integers: Int?): Void? {
+         override fun doInBackground(vararg integers: Int?){
             mPeers = integers[0]!!.let { (application as RecordVoiceLearning).database
                     .peerDao()
                     .loadAllPeerByFolderIdSync(it)}
-             return null
         }
 
-        override fun onPostExecute(aVoid: Void) {
-            super.onPostExecute(aVoid)
+        override fun onPostExecute(result: Unit) {
+            super.onPostExecute(result)
             init()
         }
     }

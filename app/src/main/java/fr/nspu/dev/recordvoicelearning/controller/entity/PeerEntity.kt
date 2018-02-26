@@ -21,37 +21,44 @@ import fr.nspu.dev.recordvoicelearning.model.Peer
                 parentColumns = arrayOf("id"), childColumns = arrayOf("folder_Id"),
                 onDelete = ForeignKey.CASCADE)),
         indices = arrayOf(Index(value = "folder_Id")))
-class PeerEntity(
-            @ColumnInfo(name = "id") @PrimaryKey(autoGenerate = true) override var id: Int?,
-            @ColumnInfo(name = "folder_Id") override var folderId: Int?,
-            @ColumnInfo(name = "file_name_question") override var fileNameQuestion: String?,
-            @ColumnInfo(name = "file_name_answer") override var fileNameAnswer: String?,
-            private val _knowledge: Int?,
-            @ColumnInfo(name = "count") override var count: Int?)
-    : Peer, Serializable {
+class PeerEntity() : Peer, Serializable {
+    @ColumnInfo(name = "id")
+    @PrimaryKey(autoGenerate = true)
+    override var id: Int? = null
 
-    @ColumnInfo(name = "created_at")
-    override var createdAt: Date? = null
+    @ColumnInfo(name = "folder_Id")
+    override var folderId: Int? = null
 
-    @ColumnInfo(name = "updated_at")
-    override var updatedAt: Date? = null
+    @ColumnInfo(name = "file_name_question")
+    override var fileNameQuestion: String? = null
 
+    @ColumnInfo(name = "file_name_answer")
+    override var fileNameAnswer: String? = null
 
     @ColumnInfo(name = "knowledge")
-    override var knowledge: Int? = _knowledge
+    override var knowledge: Int? = 0
         set(value) {
             if (value!! > 10) {
-                this.knowledge = 10
+                field = 10
             } else if (value < 0) {
-                this.knowledge = 0
+                field = 0
             } else {
-                this.knowledge = value
+                field = value
             }
         }
 
+    @ColumnInfo(name = "count")
+    override var count: Int? = 0
+
+    @ColumnInfo(name = "created_at")
+    override var createdAt: Date? = Date()
+
+    @ColumnInfo(name = "updated_at")
+    override var updatedAt: Date? = Date()
+
 
     fun increaseKnowledge() {
-        if (knowledge!!.compareTo(10) == -1 ) {
+        if (knowledge!!.compareTo(10) == -1) {
             knowledge = knowledge!!.inc()
         }
         this.count = this.count!!.inc()
@@ -61,8 +68,18 @@ class PeerEntity(
         if (knowledge!! > 0) {
             knowledge = knowledge!!.dec()
         }
-            this.count = this.count!!.inc()
+        this.count = this.count!!.inc()
     }
 
-    constructor() : this(0, 0, "", "", 0, 0) {}
+    constructor(_idFolder: Int?) : this() {
+        folderId = _idFolder
+    }
+
+    constructor(_id: Int, _idFolder: Int, _fileNameQuestion: String, _fileNameAnswer: String, _knowledge: Int, _count: Int) : this(_idFolder) {
+        id = _id
+        fileNameQuestion = _fileNameQuestion
+        fileNameAnswer = _fileNameAnswer
+        knowledge = _knowledge
+        count = _count
+    }
 }

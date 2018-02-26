@@ -1,4 +1,4 @@
-package fr.nspu.dev.recordvoicelearning.view;
+package fr.nspu.dev.recordvoicelearning.view.activity;
 
 
 import android.support.test.espresso.ViewInteraction;
@@ -18,9 +18,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import fr.nspu.dev.recordvoicelearning.R;
-import fr.nspu.dev.recordvoicelearning.view.activity.MainActivity;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.longClick;
@@ -44,7 +44,7 @@ public class MainActivityWithRecordTest {
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void mainActivityTest2() {
+    public void mainActivityRecordTest() {
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
@@ -74,7 +74,7 @@ public class MainActivityWithRecordTest {
                                                 0)),
                                 0),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("J"), closeSoftKeyboard());
+        appCompatEditText.perform(replaceText("E"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.add_type_question_et),
@@ -85,7 +85,7 @@ public class MainActivityWithRecordTest {
                                                 0)),
                                 1),
                         isDisplayed()));
-        appCompatEditText2.perform(replaceText("U"), closeSoftKeyboard());
+        appCompatEditText2.perform(replaceText("T"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText3 = onView(
                 allOf(withId(R.id.add_type_answer_et),
@@ -96,7 +96,7 @@ public class MainActivityWithRecordTest {
                                                 0)),
                                 2),
                         isDisplayed()));
-        appCompatEditText3.perform(replaceText("U"), closeSoftKeyboard());
+        appCompatEditText3.perform(replaceText("S"), closeSoftKeyboard());
 
         ViewInteraction actionMenuItemView = onView(
                 allOf(withId(R.id.action_validate_add_folder), withContentDescription("Valider"),
@@ -108,44 +108,35 @@ public class MainActivityWithRecordTest {
                         isDisplayed()));
         actionMenuItemView.perform(click());
 
-        ViewInteraction linearLayout = onView(
-                allOf(childAtPosition(
-                        childAtPosition(
-                                allOf(withId(R.id.folders_list), withContentDescription("Folders list")),
-                                0),
-                        0),
-                        isDisplayed()));
-        linearLayout.check(matches(isDisplayed()));
-
         ViewInteraction textView = onView(
-                allOf(withId(R.id.name), withText("J"), withContentDescription("Name of the folder"),
+                allOf(withId(R.id.name), withText("E"), withContentDescription("Name of the folder"),
                         childAtPosition(
                                 childAtPosition(
-                                        IsInstanceOf.instanceOf(android.widget.FrameLayout.class),
+                                        IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class),
                                         0),
                                 0),
                         isDisplayed()));
-        textView.check(matches(withText("J")));
+        textView.check(matches(withText("E")));
 
         ViewInteraction textView2 = onView(
-                allOf(withId(R.id.type_question), withText("U"), withContentDescription("Name of the folder"),
+                allOf(withId(R.id.type_question), withText("T"), withContentDescription("Name of the folder"),
                         childAtPosition(
                                 childAtPosition(
-                                        IsInstanceOf.instanceOf(android.widget.FrameLayout.class),
+                                        IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class),
                                         0),
                                 1),
                         isDisplayed()));
-        textView2.check(matches(withText("U")));
+        textView2.check(matches(withText("T")));
 
         ViewInteraction textView3 = onView(
-                allOf(withId(R.id.type_answer), withText("U"), withContentDescription("Name of the folder"),
+                allOf(withId(R.id.type_answer), withText("S"), withContentDescription("Name of the folder"),
                         childAtPosition(
                                 childAtPosition(
-                                        IsInstanceOf.instanceOf(android.widget.FrameLayout.class),
+                                        IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class),
                                         0),
                                 2),
                         isDisplayed()));
-        textView3.check(matches(withText("U")));
+        textView3.check(matches(withText("S")));
 
         ViewInteraction recyclerView = onView(
                 allOf(withId(R.id.folders_list), withContentDescription("Folders list"),
@@ -153,56 +144,6 @@ public class MainActivityWithRecordTest {
                                 withId(R.id.cl_list_folder),
                                 1)));
         recyclerView.perform(actionOnItemAtPosition(0, click()));
-
-        ViewInteraction textView4 = onView(
-                allOf(withId(R.id.name), withText("J"), withContentDescription("Name of the folder"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.include_item_folder),
-                                        0),
-                                0),
-                        isDisplayed()));
-        textView4.check(matches(withText("J")));
-
-        ViewInteraction textView5 = onView(
-                allOf(withId(R.id.type_question), withText("U"), withContentDescription("Name of the folder"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.include_item_folder),
-                                        0),
-                                1),
-                        isDisplayed()));
-        textView5.check(matches(withText("U")));
-
-        ViewInteraction textView6 = onView(
-                allOf(withId(R.id.type_answer), withText("U"), withContentDescription("Name of the folder"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.include_item_folder),
-                                        0),
-                                2),
-                        isDisplayed()));
-        textView6.check(matches(withText("U")));
-
-        ViewInteraction textView7 = onView(
-                allOf(withId(R.id.tv_count_peers), withText("0"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.fragment_container),
-                                        0),
-                                1),
-                        isDisplayed()));
-        textView7.check(matches(withText("0")));
-
-        ViewInteraction textView8 = onView(
-                allOf(withId(R.id.tv_count_peers), withText("0"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.fragment_container),
-                                        0),
-                                1),
-                        isDisplayed()));
-        textView8.check(matches(withText("0")));
 
         ViewInteraction actionMenuItemView2 = onView(
                 allOf(withId(R.id.action_add_peer), withContentDescription("Ajouter folder"),
@@ -265,6 +206,27 @@ public class MainActivityWithRecordTest {
         appCompatButton4.perform(click());
 
         ViewInteraction appCompatButton5 = onView(
+                allOf(withId(R.id.listen_question_btn), withText("ecouter question"),
+                        childAtPosition(
+                                allOf(withId(R.id.ll_record),
+                                        childAtPosition(
+                                                withClassName(is("android.support.constraint.ConstraintLayout")),
+                                                0)),
+                                1),
+                        isDisplayed()));
+        appCompatButton5.perform(click());
+
+        ViewInteraction appCompatButton6 = onView(
+                allOf(withId(R.id.listen_answer_btn), withText("écouter réponse"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.support.constraint.ConstraintLayout")),
+                                        1),
+                                1),
+                        isDisplayed()));
+        appCompatButton6.perform(click());
+
+        ViewInteraction appCompatButton7 = onView(
                 allOf(withId(R.id.record_another_btn), withText("Enregistrer et créer une autre paire"),
                         childAtPosition(
                                 childAtPosition(
@@ -272,35 +234,15 @@ public class MainActivityWithRecordTest {
                                         2),
                                 2),
                         isDisplayed()));
-        appCompatButton5.perform(click());
+        appCompatButton7.perform(click());
 
-        ViewInteraction appCompatButton6 = onView(
+        ViewInteraction appCompatButton8 = onView(
                 allOf(withId(R.id.record_question_btn), withText("Enregistrer question"),
                         childAtPosition(
                                 allOf(withId(R.id.ll_record),
                                         childAtPosition(
                                                 withClassName(is("android.support.constraint.ConstraintLayout")),
                                                 0)),
-                                0),
-                        isDisplayed()));
-        appCompatButton6.perform(click());
-
-        ViewInteraction appCompatButton7 = onView(
-                allOf(withId(R.id.stop_btn), withText("Stop"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                2),
-                        isDisplayed()));
-        appCompatButton7.perform(click());
-
-        ViewInteraction appCompatButton8 = onView(
-                allOf(withId(R.id.record_answer_btn), withText("Enregistrer réponse"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.support.constraint.ConstraintLayout")),
-                                        1),
                                 0),
                         isDisplayed()));
         appCompatButton8.perform(click());
@@ -316,6 +258,47 @@ public class MainActivityWithRecordTest {
         appCompatButton9.perform(click());
 
         ViewInteraction appCompatButton10 = onView(
+                allOf(withId(R.id.listen_question_btn), withText("ecouter question"),
+                        childAtPosition(
+                                allOf(withId(R.id.ll_record),
+                                        childAtPosition(
+                                                withClassName(is("android.support.constraint.ConstraintLayout")),
+                                                0)),
+                                1),
+                        isDisplayed()));
+        appCompatButton10.perform(click());
+
+        ViewInteraction appCompatButton11 = onView(
+                allOf(withId(R.id.record_answer_btn), withText("Enregistrer réponse"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.support.constraint.ConstraintLayout")),
+                                        1),
+                                0),
+                        isDisplayed()));
+        appCompatButton11.perform(click());
+
+        ViewInteraction appCompatButton12 = onView(
+                allOf(withId(R.id.stop_btn), withText("Stop"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                2),
+                        isDisplayed()));
+        appCompatButton12.perform(click());
+
+        ViewInteraction appCompatButton13 = onView(
+                allOf(withId(R.id.listen_answer_btn), withText("écouter réponse"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.support.constraint.ConstraintLayout")),
+                                        1),
+                                1),
+                        isDisplayed()));
+        appCompatButton13.perform(click());
+
+        ViewInteraction appCompatButton14 = onView(
                 allOf(withId(R.id.exit_btn), withText("Enregistrer et quitter"),
                         childAtPosition(
                                 childAtPosition(
@@ -323,7 +306,7 @@ public class MainActivityWithRecordTest {
                                         2),
                                 0),
                         isDisplayed()));
-        appCompatButton10.perform(click());
+        appCompatButton14.perform(click());
 
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
@@ -334,7 +317,7 @@ public class MainActivityWithRecordTest {
             e.printStackTrace();
         }
 
-        ViewInteraction appCompatButton11 = onView(
+        ViewInteraction appCompatButton15 = onView(
                 allOf(withId(R.id.btn_play_peers), withText("Play"),
                         childAtPosition(
                                 childAtPosition(
@@ -342,7 +325,7 @@ public class MainActivityWithRecordTest {
                                         2),
                                 1),
                         isDisplayed()));
-        appCompatButton11.perform(click());
+        appCompatButton15.perform(click());
 
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
@@ -353,59 +336,59 @@ public class MainActivityWithRecordTest {
             e.printStackTrace();
         }
 
-        ViewInteraction appCompatButton12 = onView(
+        ViewInteraction appCompatButton16 = onView(
                 allOf(withId(R.id.btn_listen_question), withText("ecouter question"),
                         childAtPosition(
                                 allOf(withId(R.id.constraintLayout),
                                         withParent(withId(R.id.container))),
                                 3),
                         isDisplayed()));
-        appCompatButton12.perform(click());
+        appCompatButton16.perform(click());
 
-        ViewInteraction appCompatButton13 = onView(
+        ViewInteraction appCompatButton17 = onView(
                 allOf(withId(R.id.btn_listen_answer), withText("écouter réponse"),
                         childAtPosition(
                                 allOf(withId(R.id.constraintLayout),
                                         withParent(withId(R.id.container))),
                                 4),
                         isDisplayed()));
-        appCompatButton13.perform(click());
+        appCompatButton17.perform(click());
 
-        ViewInteraction appCompatButton14 = onView(
+        ViewInteraction appCompatButton18 = onView(
                 allOf(withId(R.id.btn_good), withText("Bon"),
                         childAtPosition(
                                 allOf(withId(R.id.constraintLayout),
                                         withParent(withId(R.id.container))),
                                 6),
                         isDisplayed()));
-        appCompatButton14.perform(click());
+        appCompatButton18.perform(click());
 
-        ViewInteraction appCompatButton15 = onView(
+        ViewInteraction appCompatButton19 = onView(
                 allOf(withId(R.id.btn_listen_question), withText("ecouter question"),
                         childAtPosition(
                                 allOf(withId(R.id.constraintLayout),
                                         withParent(withId(R.id.container))),
                                 3),
                         isDisplayed()));
-        appCompatButton15.perform(click());
+        appCompatButton19.perform(click());
 
-        ViewInteraction appCompatButton16 = onView(
+        ViewInteraction appCompatButton20 = onView(
                 allOf(withId(R.id.btn_listen_answer), withText("écouter réponse"),
                         childAtPosition(
                                 allOf(withId(R.id.constraintLayout),
                                         withParent(withId(R.id.container))),
                                 4),
                         isDisplayed()));
-        appCompatButton16.perform(click());
+        appCompatButton20.perform(click());
 
-        ViewInteraction appCompatButton17 = onView(
+        ViewInteraction appCompatButton21 = onView(
                 allOf(withId(R.id.btn_wrong), withText("Faux"),
                         childAtPosition(
                                 allOf(withId(R.id.constraintLayout),
                                         withParent(withId(R.id.container))),
                                 5),
                         isDisplayed()));
-        appCompatButton17.perform(click());
+        appCompatButton21.perform(click());
 
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
@@ -416,72 +399,6 @@ public class MainActivityWithRecordTest {
             e.printStackTrace();
         }
 
-        ViewInteraction textView9 = onView(
-                allOf(withId(R.id.name_tv), withText("Pair : 2"), withContentDescription("peer"),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.instanceOf(android.widget.FrameLayout.class),
-                                        0),
-                                0),
-                        isDisplayed()));
-        textView9.check(matches(withText("Pair : 2")));
-
-        ViewInteraction textView10 = onView(
-                allOf(withId(R.id.name_tv), withText("Pair : 1"), withContentDescription("peer"),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.instanceOf(android.widget.FrameLayout.class),
-                                        0),
-                                0),
-                        isDisplayed()));
-        textView10.check(matches(withText("Pair : 1")));
-
-        ViewInteraction viewGroup = onView(
-                allOf(childAtPosition(
-                        childAtPosition(
-                                allOf(withId(R.id.peers_list), withContentDescription("Peers list")),
-                                1),
-                        0),
-                        isDisplayed()));
-        viewGroup.check(matches(isDisplayed()));
-
-        ViewInteraction viewGroup2 = onView(
-                allOf(childAtPosition(
-                        childAtPosition(
-                                allOf(withId(R.id.peers_list), withContentDescription("Peers list")),
-                                0),
-                        0),
-                        isDisplayed()));
-        viewGroup2.check(matches(isDisplayed()));
-
-        ViewInteraction viewGroup3 = onView(
-                allOf(childAtPosition(
-                        childAtPosition(
-                                allOf(withId(R.id.peers_list), withContentDescription("Peers list")),
-                                1),
-                        0),
-                        isDisplayed()));
-        viewGroup3.check(matches(isDisplayed()));
-
-        ViewInteraction textView11 = onView(
-                allOf(withId(R.id.name_tv), withText("Pair : 1"), withContentDescription("peer"),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.instanceOf(android.widget.FrameLayout.class),
-                                        0),
-                                0),
-                        isDisplayed()));
-        textView11.check(matches(withText("Pair : 1")));
-
-        ViewInteraction textView12 = onView(
-                allOf(withId(R.id.name_tv), withText("Pair : 1"), withContentDescription("peer"),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.instanceOf(android.widget.FrameLayout.class),
-                                        0),
-                                0),
-                        isDisplayed()));
-        textView12.check(matches(withText("Pair : 1")));
 
         ViewInteraction toggleButton = onView(
                 allOf(withId(R.id.btn_order), withText("ASC"),
@@ -493,16 +410,37 @@ public class MainActivityWithRecordTest {
                         isDisplayed()));
         toggleButton.perform(click());
 
-        ViewInteraction appCompatImageButton = onView(
-                allOf(withContentDescription("Revenir en haut de la page"),
+        ViewInteraction textView6 = onView(
+                allOf(withId(R.id.knowledge_tv), withText("1"), withContentDescription("Knowledge"),
                         childAtPosition(
-                                allOf(withId(R.id.toolbar),
-                                        childAtPosition(
-                                                withClassName(is("android.support.design.widget.AppBarLayout")),
-                                                0)),
+                                childAtPosition(
+                                        IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class),
+                                        0),
                                 1),
                         isDisplayed()));
-        appCompatImageButton.perform(click());
+        textView6.check(matches(withText("1")));
+
+        ViewInteraction textView7 = onView(
+                allOf(withId(R.id.knowledge_tv), withText("0"), withContentDescription("Knowledge"),
+                        childAtPosition(
+                                childAtPosition(
+                                        IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class),
+                                        0),
+                                1),
+                        isDisplayed()));
+        textView7.check(matches(withText("0")));
+
+        ViewInteraction toggleButton2 = onView(
+                allOf(withId(R.id.btn_question_to_answer), withText("Q -> A"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        2),
+                                0),
+                        isDisplayed()));
+        toggleButton2.perform(click());
+
+        pressBack();
 
         ViewInteraction recyclerView2 = onView(
                 allOf(withId(R.id.folders_list), withContentDescription("Folders list"),
@@ -510,6 +448,7 @@ public class MainActivityWithRecordTest {
                                 withId(R.id.cl_list_folder),
                                 1)));
         recyclerView2.perform(actionOnItemAtPosition(0, longClick()));
+
 
     }
 

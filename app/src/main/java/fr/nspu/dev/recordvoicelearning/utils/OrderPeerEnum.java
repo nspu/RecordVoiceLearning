@@ -4,7 +4,7 @@ public enum OrderPeerEnum{
         KNOWLEDGE_ASCENDING(0),
         KNOWLEDGE_DESCENDING(1);
 
-        int order = 0;
+        Integer order = 0;
 
         OrderPeerEnum(int i) {
             this.order = i;
@@ -14,7 +14,7 @@ public enum OrderPeerEnum{
             return order;
         }
 
-        public static OrderPeerEnum toOrderPeerEnum(int id){
+        public static OrderPeerEnum toOrderPeerEnum(Integer id){
             switch (id){
                 case 0:
                     return KNOWLEDGE_ASCENDING;
