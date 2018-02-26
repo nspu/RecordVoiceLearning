@@ -20,25 +20,10 @@ import android.arch.persistence.room.TypeConverter
 
 import java.util.Date
 
-<<<<<<< HEAD
 object DateConverter {
     @TypeConverter
     fun toDate(timestamp: Long?): Date? = timestamp?.let { Date(it) }
 
     @TypeConverter
     fun toTimestamp(date: Date?): Long? = date?.time
-=======
-class DateConverter {
-    companion object {
-        @TypeConverter
-        fun toDate(timestamp: Long?): Date? {
-            return if (timestamp == null) null else Date(timestamp)
-        }
-
-        @TypeConverter
-        fun toTimestamp(date: Date?): Long? {
-            return date?.time
-        }
-    }
->>>>>>> ff2f35cdc51ea92cf7acf28096a98e2a94103ab2
 }
