@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                     folderListFragment = new FolderListFragment();
 
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, folderListFragment, FolderListFragment.TAG).commit();
+                    .add(R.id.fragment_container, folderListFragment, FolderListFragment.Companion.getTAG()).commit();
         }
     }
 
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     /** Shows the folder detail fragment */
     public void showFolder(Folder folder) {
 
-        FolderFragment productFragment = FolderFragment.forFolder(folder.getId(), folder.getQuestionToAnswer());
+        FolderFragment productFragment = FolderFragment.Companion.forFolder(folder.getId(), folder.getQuestionToAnswer());
 
         getSupportFragmentManager()
                 .beginTransaction()

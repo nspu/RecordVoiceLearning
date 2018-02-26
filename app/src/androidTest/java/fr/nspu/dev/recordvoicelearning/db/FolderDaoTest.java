@@ -4,7 +4,10 @@ import android.arch.persistence.room.Room;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import android.arch.core.executor.testing.InstantTaskExecutorRule;
 
@@ -34,7 +37,7 @@ public class FolderDaoTest {
 
     private FolderDao mFolderDao;
 
-    @BeforeEach
+    @Before
     public void initDb() throws Exception{
         // using an in-memory database because the information stored here disappears when the
         // process is killed
@@ -45,12 +48,12 @@ public class FolderDaoTest {
         mFolderDao = mDatabase.folderDao();
     }
 
-    @AfterEach
+    @After
     public void closeDb() throws Exception{
         mDatabase.close();
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void getFoldersWhenNoFolderInserted() throws InterruptedException{
         List<FolderEntity> folder = LiveDataTestUtil.getValue(mFolderDao.loadAllFolders());
 
@@ -66,7 +69,7 @@ public class FolderDaoTest {
         assertThat(folders.size(), is(FOLDERS.size()));
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void getProductById() throws InterruptedException {
         mFolderDao.insertFoldersSync(FOLDERS);
 

@@ -6,7 +6,10 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.List;
@@ -38,7 +41,7 @@ public class PeerDaoTest {
 
     private FolderDao mFolderDao;
 
-    @BeforeEach
+    @Before
     public void initDb() throws Exception {
         // using an in-memory database because the information stored here disappears when the
         // process is killed
@@ -52,7 +55,7 @@ public class PeerDaoTest {
         mFolderDao = mDatabase.folderDao();
     }
 
-    @AfterEach
+    @After
     public void closeDb() throws Exception {
         mDatabase.close();
     }
@@ -65,7 +68,7 @@ public class PeerDaoTest {
         assertTrue(comments.isEmpty());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void cantInsertPeerWithoutProduct() throws InterruptedException {
         try {
             mPeerDao.insertPeersSync(PEERS);
@@ -75,7 +78,7 @@ public class PeerDaoTest {
         }
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void getPeersAfterInserted() throws InterruptedException {
         mFolderDao.insertFoldersSync(FOLDERS);
         mPeerDao.insertPeersSync(PEERS);
@@ -86,7 +89,7 @@ public class PeerDaoTest {
         assertThat(comments.size(), is(1));
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void getPeerByFolderId() throws InterruptedException {
         mFolderDao.insertFoldersSync(FOLDERS);
         mPeerDao.insertPeersSync(PEERS);

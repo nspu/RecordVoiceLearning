@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="fr.nspu.dev.recordvoicelearning.view.fragment.FolderListFragment">
 
-
     <data>
         <variable
             name="isLoading"

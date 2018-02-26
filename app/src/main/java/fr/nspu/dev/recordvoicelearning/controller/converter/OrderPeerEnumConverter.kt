@@ -11,12 +11,8 @@ import fr.nspu.dev.recordvoicelearning.utils.OrderPeerEnum
 
 object OrderPeerEnumConverter {
     @TypeConverter
-    fun toOrderPeerEnum(id: Int): OrderPeerEnum {
-        return OrderPeerEnum.toOrderPeerEnum(id)
-    }
+    fun toOrderPeerEnum(id: Int?): OrderPeerEnum = OrderPeerEnum.toOrderPeerEnum(id!!)
 
     @TypeConverter
-    fun toInt(orderPeerEnum: OrderPeerEnum?): Int {
-        return orderPeerEnum?.toInt() ?: 0
-    }
+    fun toInt(orderPeerEnum: OrderPeerEnum?): Int? = orderPeerEnum?.let { 0 }
 }

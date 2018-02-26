@@ -8,16 +8,12 @@ import fr.nspu.dev.recordvoicelearning.utils.QuestionToAnswerEnum
  * Created by nspu on 18-02-23.
  */
 
-class QuestionToAnswerEnumConverter {
-    companion object {
-        @TypeConverter
-        fun toQuestionToAnswerEnum(b: Boolean): QuestionToAnswerEnum {
-            return QuestionToAnswerEnum.toQuestionToAnswerEnum(b)
-        }
+object QuestionToAnswerEnumConverter {
+    @TypeConverter
+    fun toQuestionToAnswerEnum(b: Boolean?): QuestionToAnswerEnum
+            = QuestionToAnswerEnum.toQuestionToAnswerEnum(b!!)
 
-        @TypeConverter
-        fun toBoolean(questionToAnswerEnum: QuestionToAnswerEnum?): Boolean {
-            return questionToAnswerEnum == null || questionToAnswerEnum.toBoolean()
-        }
-    }
+    @TypeConverter
+    fun toBoolean(questionToAnswerEnum: QuestionToAnswerEnum?): Boolean?
+            = questionToAnswerEnum?.let { questionToAnswerEnum.toBoolean() }
 }
