@@ -17,7 +17,7 @@ import fr.nspu.dev.recordvoicelearning.utils.callback.ClickCallback
  * Created by nspu on 18-02-02.
  */
 
-class FolderAdapter(private val mFolderClickCallback: ClickCallback?) : RecyclerView.Adapter<FolderAdapter.FolderViewHolder>() {
+class   FolderAdapter(private val mFolderClickCallback: ClickCallback?) : RecyclerView.Adapter<FolderAdapter.FolderViewHolder>() {
 
     private var mFolderList: List<Folder>? = null
 
@@ -46,8 +46,6 @@ class FolderAdapter(private val mFolderClickCallback: ClickCallback?) : Recycler
                             && newFolder.name == oldFolder.name
                             && newFolder.typeAnswer == oldFolder.typeAnswer
                             && newFolder.typeQuestion == oldFolder.typeQuestion)
-                    //                            && newFolder.getCreatedAt().getTime() == oldFolder.getCreatedAt().getTime()
-                    //                            && newFolder.getUpdatedAt().getTime() == oldFolder.getCreatedAt().getTime();
                 }
             })
             mFolderList = folderList

@@ -11,7 +11,7 @@ import fr.nspu.dev.recordvoicelearning.utils.QuestionToAnswerEnum
 
 class QuestionToAnswerEnumConverter {
     @TypeConverter
-    fun toQuestionToAnswerEnum(b: Boolean?): QuestionToAnswerEnum = QuestionToAnswerEnum.toQuestionToAnswerEnum(b)
+    fun toQuestionToAnswerEnum(b: Boolean?): QuestionToAnswerEnum? = if (b != null) QuestionToAnswerEnum.toQuestionToAnswerEnum(b) else QuestionToAnswerEnum.toQuestionToAnswerEnum(null)
 
     @TypeConverter
     fun toBoolean(questionToAnswerEnum: QuestionToAnswerEnum?): Boolean? = questionToAnswerEnum?.let { it.toBoolean() }

@@ -19,8 +19,8 @@ public class QuestionToAnswerEnumTest {
 
     @Test
     public void toQuestionToAnswerEnum() throws Exception {
-        QuestionToAnswerEnum questionToAnswerEnumTrue = QuestionToAnswerEnum.toQuestionToAnswerEnum(true);
-        QuestionToAnswerEnum questionToAnswerEnumFalse = QuestionToAnswerEnum.toQuestionToAnswerEnum(false);
+        QuestionToAnswerEnum questionToAnswerEnumTrue = QuestionToAnswerEnum.Companion.toQuestionToAnswerEnum(true);
+        QuestionToAnswerEnum questionToAnswerEnumFalse = QuestionToAnswerEnum.Companion.toQuestionToAnswerEnum(false);
         
         assertEquals(questionToAnswerEnumTrue, QuestionToAnswerEnum.QUESTION_TO_ANSWER);
         assertEquals(questionToAnswerEnumFalse, QuestionToAnswerEnum.ANSWER_TO_QUESTION);

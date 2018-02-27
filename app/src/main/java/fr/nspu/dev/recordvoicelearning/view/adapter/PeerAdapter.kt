@@ -59,8 +59,6 @@ class PeerAdapter(private val mPeerClickCallback: ClickCallback?, private val mC
                             && newPeer.fileNameQuestion == oldPeer.fileNameQuestion
                             && newPeer.knowledge == oldPeer.knowledge
                             && newPeer.count == oldPeer.count)
-                    //                            && newPeer.getCreatedAt().getTime() == oldPeer.getCreatedAt().getTime()
-                    //                            && newPeer.getUpdatedAt().getTime() == oldPeer.getUpdatedAt().getTime();
                 }
             })
             mPeerList = peerList

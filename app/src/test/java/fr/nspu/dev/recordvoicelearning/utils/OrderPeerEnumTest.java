@@ -19,9 +19,9 @@ public class OrderPeerEnumTest {
 
     @Test
     public void toOrderPeerEnum() throws Exception {
-        OrderPeerEnum orderPeerEnumNotInRange = OrderPeerEnum.toOrderPeerEnum(5);
-        OrderPeerEnum orderPeerEnumCorrect0 = OrderPeerEnum.toOrderPeerEnum(0);
-        OrderPeerEnum orderPeerEnumCorrect1 = OrderPeerEnum.toOrderPeerEnum(1);
+        OrderPeerEnum orderPeerEnumNotInRange = OrderPeerEnum.Companion.toOrderPeerEnum(5);
+        OrderPeerEnum orderPeerEnumCorrect0 = OrderPeerEnum.Companion.toOrderPeerEnum(0);
+        OrderPeerEnum orderPeerEnumCorrect1 = OrderPeerEnum.Companion.toOrderPeerEnum(1);
 
         assertEquals(orderPeerEnumNotInRange, OrderPeerEnum.KNOWLEDGE_ASCENDING);
         assertEquals(orderPeerEnumCorrect0, OrderPeerEnum.KNOWLEDGE_ASCENDING);

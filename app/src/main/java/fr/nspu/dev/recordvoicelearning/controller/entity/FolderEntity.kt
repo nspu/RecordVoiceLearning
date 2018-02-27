@@ -34,10 +34,10 @@ class FolderEntity() : Folder {
     override var typeAnswer: String? = null
 
     @ColumnInfo(name = "order")
-    override var order: OrderPeerEnum? = OrderPeerEnum.KNOWLEDGE_ASCENDING
+    override var order: OrderPeerEnum = OrderPeerEnum.KNOWLEDGE_ASCENDING
 
     @ColumnInfo(name = "question_to_answer")
-    override var questionToAnswer: QuestionToAnswerEnum? = QuestionToAnswerEnum.QUESTION_TO_ANSWER
+    override var questionToAnswer: QuestionToAnswerEnum = QuestionToAnswerEnum.QUESTION_TO_ANSWER
 
     @ColumnInfo(name = "created_at")
     override var createdAt: Date? = null

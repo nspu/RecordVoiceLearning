@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package fr.nspu.dev.recordvoicelearning.utils;
+package fr.nspu.dev.recordvoicelearning.utils
 
-import android.databinding.BindingAdapter;
-import android.view.View;
+import android.databinding.BindingAdapter
+import android.view.View
 
 /**
  * Created by nspu on 18-02-04.
  */
 
-public class BindingAdapters {
+object BindingAdapters {
     @BindingAdapter("visibleGone")
-    public static void showHide(View view, boolean show) {
-        view.setVisibility(show ? View.VISIBLE : View.GONE);
+    fun showHide(view: View, show: Boolean) {
+        view.visibility = if (show) View.VISIBLE else View.GONE
     }
 }

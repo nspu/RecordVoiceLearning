@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "3429adff5a767600e87f46c159fe4872",
+    "identityHash": "885e17273eb7cc8bfb661d469042c392",
     "entities": [
       {
         "tableName": "folders",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `name` TEXT, `type_question` TEXT, `type_answer` TEXT, `order` INTEGER, `question_to_answer` INTEGER, `created_at` INTEGER, `updated_at` INTEGER)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `name` TEXT, `type_question` TEXT, `type_answer` TEXT, `order` INTEGER NOT NULL, `question_to_answer` INTEGER NOT NULL, `created_at` INTEGER, `updated_at` INTEGER)",
         "fields": [
           {
             "fieldPath": "id",
@@ -36,13 +36,13 @@
             "fieldPath": "order",
             "columnName": "order",
             "affinity": "INTEGER",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "questionToAnswer",
             "columnName": "question_to_answer",
             "affinity": "INTEGER",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "createdAt",
@@ -152,7 +152,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"3429adff5a767600e87f46c159fe4872\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"885e17273eb7cc8bfb661d469042c392\")"
     ]
   }
 }

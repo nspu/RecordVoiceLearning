@@ -199,7 +199,7 @@ class ListenPeersActivity : AppCompatActivity() {
 
         private fun listen(button: Button, fileName: String?): ListenVoice {
             val directoryFinal = context!!.getExternalFilesDir(null)!!.absolutePath
-            return ListenVoice(button, fileName, directoryFinal)
+            return ListenVoice(button, fileName!!, directoryFinal)
         }
 
         private fun updatePeer() {

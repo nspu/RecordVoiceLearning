@@ -65,7 +65,7 @@ class PeerEntity() : Peer, Serializable {
     }
 
     fun descreaseKnowledge() {
-        if (knowledge!! > 0) {
+        if (knowledge!!.compareTo(0) == 1) {
             knowledge = knowledge!!.dec()
         }
         this.count = this.count!!.inc()

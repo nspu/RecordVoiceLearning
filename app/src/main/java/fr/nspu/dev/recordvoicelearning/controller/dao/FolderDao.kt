@@ -9,6 +9,7 @@ import android.arch.persistence.room.Query
 import android.arch.persistence.room.Update
 
 import fr.nspu.dev.recordvoicelearning.controller.entity.FolderEntity
+import java.util.*
 
 /**
  * Created by nspu on 18-02-02.
@@ -24,7 +25,7 @@ interface FolderDao {
     fun insertFolderSync(folder: FolderEntity)
 
     @Update
-    fun updateFoldersSync(vararg folders: FolderEntity): Int
+    fun updateFoldersSync(vararg folders: FolderEntity)
 
     @Delete
     fun deleteFolders(vararg folders: FolderEntity)
