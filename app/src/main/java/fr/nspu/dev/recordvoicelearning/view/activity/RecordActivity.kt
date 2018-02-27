@@ -159,7 +159,7 @@ class RecordActivity : AppCompatActivity() {
     private inner class LoadFolderTask : AsyncTask<Int, Void, Unit>() {
 
         override fun doInBackground(vararg integers: Int?) {
-            mFolder = (application as RecordVoiceLearning).database
+            mFolder = (application as RecordVoiceLearning).database!!
                     .folderDao()
                     .loadFolderByIdSync(integers[0]!!)
         }
@@ -175,7 +175,7 @@ class RecordActivity : AppCompatActivity() {
 
 
         override fun doInBackground(vararg peers: PeerEntity) {
-            (application as RecordVoiceLearning).database
+            (application as RecordVoiceLearning).database!!
                     .peerDao()
                     .insertPeerSync(peers[0])
         }

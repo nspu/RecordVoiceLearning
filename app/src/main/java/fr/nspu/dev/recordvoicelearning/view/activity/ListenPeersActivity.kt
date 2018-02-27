@@ -220,7 +220,7 @@ class ListenPeersActivity : AppCompatActivity() {
 
             override fun doInBackground(vararg peer: PeerEntity){
 
-                (activity!!.application as RecordVoiceLearning).database
+                (activity!!.application as RecordVoiceLearning).database!!
                         .peerDao()
                         .updatePeersSync(*peer)
             }
@@ -276,7 +276,7 @@ class ListenPeersActivity : AppCompatActivity() {
     private inner class LoadFolderPeersTask : AsyncTask<Int, Void, Unit>() {
 
          override fun doInBackground(vararg integers: Int?){
-            mPeers = integers[0]!!.let { (application as RecordVoiceLearning).database
+            mPeers = integers[0]!!.let { (application as RecordVoiceLearning).database!!
                     .peerDao()
                     .loadAllPeerByFolderIdSync(it)}
         }

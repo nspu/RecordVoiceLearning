@@ -4,6 +4,7 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
+import android.arch.lifecycle.Observer
 
 import fr.nspu.dev.recordvoicelearning.RecordVoiceLearning
 import fr.nspu.dev.recordvoicelearning.controller.entity.FolderEntity

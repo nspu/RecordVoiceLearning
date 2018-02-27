@@ -34,7 +34,7 @@ class RecordVoiceLearning : Application() {
         get() = AppDatabase.getInstance(this, mAppExecutors!!)
 
     val repository: DataRepository
-        get() = DataRepository.getInstance(database)
+        get() = DataRepository.getInstance(database!!)!!
 
     override fun onCreate() {
         super.onCreate()

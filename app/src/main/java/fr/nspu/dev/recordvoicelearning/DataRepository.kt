@@ -45,7 +45,7 @@ class DataRepository private constructor(private val mDatabase: AppDatabase) {
 
         private var sInstance: DataRepository? = null
 
-        fun getInstance(database: AppDatabase): DataRepository {
+        fun getInstance(database: AppDatabase): DataRepository? {
             if (sInstance == null) {
                 synchronized(DataRepository::class.java) {
                     if (sInstance == null) {
