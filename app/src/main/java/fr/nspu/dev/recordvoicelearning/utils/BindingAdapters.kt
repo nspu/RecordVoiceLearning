@@ -23,9 +23,8 @@ import android.view.View
  * Created by nspu on 18-02-04.
  */
 
-object BindingAdapters {
-    @BindingAdapter("visibleGone")
-    fun showHide(view: View, show: Boolean) {
-        view.visibility = if (show) View.VISIBLE else View.GONE
-    }
+
+@BindingAdapter("visibleGone")
+fun showHide(view: View, show: Boolean) {
+    view.visibility = if (show) View.VISIBLE else View.GONE
 }

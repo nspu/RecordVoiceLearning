@@ -70,11 +70,11 @@ class MainActivityTest {
     private val TYPE_QUESTION2 = "Date"
     private val TYPE_ANSWER2 = "Event"
 
-    @Rule
+    @get:Rule
     val mActivityRule = ActivityTestRule(
             MainActivity::class.java)
 
-    @Rule
+    @get:Rule
     val mCountingTaskExecutorRule = CountingTaskExecutorRule()
 
     private val mExecutor = AppExecutors()

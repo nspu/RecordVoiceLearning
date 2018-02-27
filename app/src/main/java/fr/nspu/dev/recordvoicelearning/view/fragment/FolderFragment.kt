@@ -57,7 +57,7 @@ class FolderFragment : Fragment() {
         mPeerAdapter = PeerAdapter(mPeerClickCallback, context!!)
         mBinding!!.peersList.adapter = mPeerAdapter
 
-        mBinding!!.btnPlayPeers.setOnClickListener { v:View? ->
+        mBinding!!.btnPlayPeers.setOnClickListener { _:View? ->
             val intent = Intent(
                     activity,
                     ListenPeersActivity::class.java
@@ -65,8 +65,8 @@ class FolderFragment : Fragment() {
             intent.putExtra(KEY_FOLDER_ID, arguments!!.getInt(KEY_FOLDER_ID))
             val folderEntity = mBinding!!.folderViewModel!!.folder.get()
             if (folderEntity != null) {
-                intent.putExtra(KEY_ORDER, folderEntity.order!!.toInt())
-                intent.putExtra(KEY_QUESTION_TO_ANSWER, folderEntity.questionToAnswer!!.toBoolean())
+                intent.putExtra(KEY_ORDER, folderEntity.order.toInt())
+                intent.putExtra(KEY_QUESTION_TO_ANSWER, folderEntity.questionToAnswer.toBoolean())
             } else {
                 intent.putExtra(KEY_ORDER, OrderPeerEnum.KNOWLEDGE_ASCENDING.toInt())
                 intent.putExtra(KEY_QUESTION_TO_ANSWER, QuestionToAnswerEnum.QUESTION_TO_ANSWER.toBoolean())
@@ -88,7 +88,7 @@ class FolderFragment : Fragment() {
         }
 
 
-        mBinding!!.btnQuestionToAnswer.setOnCheckedChangeListener { buttonView:View?, isChecked:Boolean ->
+        mBinding!!.btnQuestionToAnswer.setOnCheckedChangeListener { _:View?, isChecked:Boolean ->
             val folderEntity = mBinding!!.folderViewModel!!.folder.get()
             if (folderEntity != null && isChecked) {
                 folderEntity.questionToAnswer = QuestionToAnswerEnum.QUESTION_TO_ANSWER

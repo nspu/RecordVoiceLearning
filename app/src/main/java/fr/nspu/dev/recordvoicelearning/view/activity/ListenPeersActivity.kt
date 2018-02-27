@@ -177,12 +177,12 @@ class ListenPeersActivity : AppCompatActivity() {
             mListenQuestion = listen(mBinding!!.btnListenQuestion, mQuestionFile)
             mListenAnswer = listen(mBinding!!.btnListenAnswer, mAnswerFile)
 
-            mBinding!!.btnGood.setOnClickListener { v:View? ->
+            mBinding!!.btnGood.setOnClickListener { _:View? ->
                 mPeer!!.increaseKnowledge()
                 updatePeer()
             }
 
-            mBinding!!.btnWrong.setOnClickListener { v:View? ->
+            mBinding!!.btnWrong.setOnClickListener { _:View? ->
                 mPeer!!.descreaseKnowledge()
                 updatePeer()
             }

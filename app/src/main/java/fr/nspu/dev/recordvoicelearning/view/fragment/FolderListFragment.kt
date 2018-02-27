@@ -5,6 +5,7 @@ import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.support.v4.app.Fragment
 import android.arch.lifecycle.ViewModelProviders
+import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.AsyncTask
 import android.support.design.widget.FloatingActionButton
@@ -31,7 +32,7 @@ class FolderListFragment : Fragment() {
 
     private var mFolderAdapter: FolderAdapter? = null
 
-    private var mBinding: FragmentListFolderBinding? = null
+        private lateinit var mBinding: FragmentListFolderBinding
 
     private val mFolderClickCallback = object : ClickCallback {
         override fun onClick(o: Any) {
@@ -54,7 +55,7 @@ class FolderListFragment : Fragment() {
         mBinding!!.foldersList.adapter = mFolderAdapter
         setHasOptionsMenu(true)
 
-        return mBinding!!.root
+        return mBinding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -65,7 +66,7 @@ class FolderListFragment : Fragment() {
         subscribeUi(viewModel)
 
         val fab = view!!.findViewById<FloatingActionButton>(R.id.fab_add_folder)
-        fab.setOnClickListener { view -> (activity as MainActivity).addFolder() }
+        fab.setOnClickListener { _ -> (activity as MainActivity).addFolder() }
 
         super.onActivityCreated(savedInstanceState)
     }

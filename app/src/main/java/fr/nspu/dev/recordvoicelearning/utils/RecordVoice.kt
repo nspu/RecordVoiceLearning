@@ -38,7 +38,7 @@ abstract class RecordVoice(private val mFileName: String, private val mDirectory
         if (context != null) {
             mRecordDialog = RecordDialog(context)
             mRecordDialog.soundProgress.max = MAX_VALUE_PROGRESSBAR
-            mRecordDialog.stopButton.setOnClickListener { v ->
+            mRecordDialog.stopButton.setOnClickListener { _ ->
                 //stop
                 isRecord = false
                 this@RecordVoice.stopRecording()
@@ -80,7 +80,7 @@ abstract class RecordVoice(private val mFileName: String, private val mDirectory
 
                     }
                     max = defineMax(max, maxAmplitude)
-                    mRecordDialog!!.soundProgress.progress = max
+                    mRecordDialog.soundProgress.progress = max
                 }
             }.start()
 
@@ -91,7 +91,7 @@ abstract class RecordVoice(private val mFileName: String, private val mDirectory
     fun defineMax(max: Int, maxAmplitude: Int): Int {
         var max = max
         if (max < maxAmplitude) {
-            if (maxAmplitude!! > MAX_VALUE_PROGRESSBAR) {
+            if (maxAmplitude > MAX_VALUE_PROGRESSBAR) {
                 max = MAX_VALUE_PROGRESSBAR
             } else {
                 max = maxAmplitude

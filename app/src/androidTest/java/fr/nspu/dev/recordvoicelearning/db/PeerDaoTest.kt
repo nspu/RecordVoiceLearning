@@ -28,7 +28,7 @@ import org.junit.Assert.assertThat
 @RunWith(AndroidJUnit4::class)
 class PeerDaoTest {
 
-    @Rule
+    @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private var mDatabase: AppDatabase? = null

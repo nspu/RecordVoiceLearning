@@ -54,7 +54,7 @@ class RecordActivity : AppCompatActivity() {
         LoadFolderTask().execute(folderId)
 
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_record)
-        mBinding!!.exitBtn.setOnClickListener { v: View -> exit() }
+        mBinding!!.exitBtn.setOnClickListener { _: View -> exit() }
 
         mBinding!!.recordAnotherBtn.setOnClickListener { _: View -> recordAnAnother() }
     }
@@ -85,7 +85,7 @@ class RecordActivity : AppCompatActivity() {
         val fileNameAnswer = mFolder!!.id.toString() + "_a_" + uuidGenerate + ".mp4"
         val directory = externalCacheDir!!.absolutePath
 
-        mBinding!!.resetBtn.setOnClickListener { v: View? -> init() }
+        mBinding!!.resetBtn.setOnClickListener { _: View? -> init() }
 
         object : RecordVoice(fileNameQuestion, directory, mBinding!!.recordQuestionBtn, this) {
 
