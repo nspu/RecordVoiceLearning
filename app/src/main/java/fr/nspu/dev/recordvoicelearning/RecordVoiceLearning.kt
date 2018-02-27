@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package fr.nspu.dev.recordvoicelearning;
+package fr.nspu.dev.recordvoicelearning
 
-import android.app.Application;
+import android.app.Application
 
-import fr.nspu.dev.recordvoicelearning.controller.AppDatabase;
+import fr.nspu.dev.recordvoicelearning.controller.AppDatabase
 
 
 /**
@@ -26,22 +26,19 @@ import fr.nspu.dev.recordvoicelearning.controller.AppDatabase;
  *
  * Android Application class. Used for accessing singletons.
  */
-public class RecordVoiceLearning extends Application {
+class RecordVoiceLearning : Application() {
 
-    private AppExecutors mAppExecutors;
+    private var mAppExecutors: AppExecutors? = null
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
+    val database: AppDatabase?
+        get() = AppDatabase.getInstance(this, mAppExecutors!!)
 
-        mAppExecutors = new AppExecutors();
-    }
+    val repository: DataRepository
+        get() = DataRepository.getInstance(database)
 
-    public AppDatabase getDatabase() {
-        return AppDatabase.Companion.getInstance(this, mAppExecutors);
-    }
+    override fun onCreate() {
+        super.onCreate()
 
-    public DataRepository getRepository() {
-        return DataRepository.getInstance(getDatabase());
+        mAppExecutors = AppExecutors()
     }
 }
