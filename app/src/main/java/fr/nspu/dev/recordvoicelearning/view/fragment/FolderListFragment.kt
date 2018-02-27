@@ -109,7 +109,7 @@ class FolderListFragment : Fragment() {
 
 
         override fun doInBackground(vararg folderEntities: FolderEntity) {
-            (activity!!.application as RecordVoiceLearning).database.folderDao().deleteFolders(folderEntities[0])
+            (activity!!.application as RecordVoiceLearning).database!!.folderDao().deleteFolders(folderEntities[0])
         }
 
 

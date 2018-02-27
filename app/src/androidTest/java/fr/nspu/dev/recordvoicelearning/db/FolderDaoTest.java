@@ -55,32 +55,32 @@ public class FolderDaoTest {
 
     @Test
     public void getFoldersWhenNoFolderInserted() throws InterruptedException{
-        List<FolderEntity> folder = LiveDataTestUtil.getValue(mFolderDao.loadAllFolders());
+        List<FolderEntity> folder = LiveDataTestUtil.INSTANCE.getValue(mFolderDao.loadAllFolders());
 
         Assert.assertTrue(folder.isEmpty());
     }
 
     @Test
     public void getProductsAfterInserted() throws InterruptedException {
-        mFolderDao.insertFoldersSync(FOLDERS);
+        mFolderDao.insertFoldersSync(INSTANCE.getFOLDERS());
 
-        List<FolderEntity> folders = LiveDataTestUtil.getValue(mFolderDao.loadAllFolders());
+        List<FolderEntity> folders = LiveDataTestUtil.INSTANCE.getValue(mFolderDao.loadAllFolders());
 
-        assertThat(folders.size(), is(FOLDERS.size()));
+        assertThat(folders.size(), is(INSTANCE.getFOLDERS().size()));
     }
 
     @Test
     public void getProductById() throws InterruptedException {
-        mFolderDao.insertFoldersSync(FOLDERS);
+        mFolderDao.insertFoldersSync(INSTANCE.getFOLDERS());
 
-        FolderEntity product = LiveDataTestUtil.getValue(mFolderDao
-                .loadFolderById(FOLDER_ENTITY.getId()));
+        FolderEntity product = LiveDataTestUtil.INSTANCE.getValue(mFolderDao
+                .loadFolderById(INSTANCE.getFOLDER_ENTITY().getId()));
 
-        assertThat(product.getId(), is(FOLDER_ENTITY.getId()));
-        assertThat(product.getName(), is(FOLDER_ENTITY.getName()));
-        assertThat(product.getTypeAnswer(), is(FOLDER_ENTITY.getTypeAnswer()));
-        assertThat(product.getTypeQuestion(), is(FOLDER_ENTITY.getTypeQuestion()));
-        assertThat(product.getCreatedAt(), is(FOLDER_ENTITY.getCreatedAt()));
-        assertThat(product.getUpdatedAt(), is(FOLDER_ENTITY.getUpdatedAt()));
+        assertThat(product.getId(), is(INSTANCE.getFOLDER_ENTITY().getId()));
+        assertThat(product.getName(), is(INSTANCE.getFOLDER_ENTITY().getName()));
+        assertThat(product.getTypeAnswer(), is(INSTANCE.getFOLDER_ENTITY().getTypeAnswer()));
+        assertThat(product.getTypeQuestion(), is(INSTANCE.getFOLDER_ENTITY().getTypeQuestion()));
+        assertThat(product.getCreatedAt(), is(INSTANCE.getFOLDER_ENTITY().getCreatedAt()));
+        assertThat(product.getUpdatedAt(), is(INSTANCE.getFOLDER_ENTITY().getUpdatedAt()));
     }
 }

@@ -60,7 +60,7 @@ class AddFolderFragment : Fragment() {
     private inner class DatabaseAsync : AsyncTask<FolderEntity, Void, Unit>() {
 
         override fun doInBackground(vararg folderEntities: FolderEntity) {
-            (activity!!.application as RecordVoiceLearning).database.folderDao().insertFolderSync(folderEntities[0])
+            (activity!!.application as RecordVoiceLearning).database!!.folderDao().insertFolderSync(folderEntities[0])
         }
 
         override fun onPostExecute(result: Unit?) {

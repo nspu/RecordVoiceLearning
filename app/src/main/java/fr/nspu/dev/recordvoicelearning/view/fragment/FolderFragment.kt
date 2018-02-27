@@ -143,7 +143,7 @@ class FolderFragment : Fragment() {
     private fun subscribeToModel(model: FolderViewModel) {
 
         // Observe folder data
-        model.observableFolder.observe(this, Observer { model.setFolder(it) })
+        model.observableFolder.observe(this, Observer { model.setFolder(it!!) })
 
         model.observableFolder.observe(this, Observer { folderEntity ->
             // Observe peers
@@ -176,7 +176,7 @@ class FolderFragment : Fragment() {
         override fun doInBackground(vararg folderEntities: FolderEntity) {
             var folderEntity = folderEntities[0]
             (activity!!.application as RecordVoiceLearning)
-                    .database
+                    .database!!
                     .folderDao()
                     .updateFoldersSync(folderEntity)
         }
