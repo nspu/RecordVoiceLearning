@@ -27,6 +27,12 @@ android {
     dataBinding {
         enabled = true
     }
+
+    // This enables long timeouts required on slow environments, e.g. Travis
+    adbOptions {
+        timeOutInMs 20 * 60 * 1000  // 20 minutes
+        installOptions "-d","-t"
+    }
 }
 
 dependencies {
