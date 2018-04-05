@@ -26,7 +26,6 @@ class FolderViewModel(application: Application, repository: DataRepository, idFo
     val observableFolder: LiveData<FolderEntity>
     val peers: LiveData<List<PeerEntity>>
 
-
     init {
 
         observableFolder = repository.loadFolder(idFolder)

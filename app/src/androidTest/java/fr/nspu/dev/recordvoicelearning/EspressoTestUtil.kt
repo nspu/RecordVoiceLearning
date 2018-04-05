@@ -2,6 +2,7 @@ package fr.nspu.dev.recordvoicelearning
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.support.test.espresso.matcher.BoundedMatcher
 import android.support.test.rule.ActivityTestRule
@@ -15,6 +16,10 @@ import android.widget.ProgressBar
 
 import org.hamcrest.Description
 import org.hamcrest.Matcher
+import android.os.Build.VERSION
+import android.os.Build.VERSION.SDK_INT
+
+
 
 /**
  * Utility methods for espresso tests.
@@ -58,6 +63,8 @@ object EspressoTestUtil {
             }
         }
     }
+
+
 
     private fun disableRecyclerViewAnimations(view: RecyclerView) {
         view.itemAnimator = null

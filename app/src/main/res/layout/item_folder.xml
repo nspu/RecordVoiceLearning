@@ -25,19 +25,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/cd_folder_name"
+                android:hint="Title"
                 android:text="@{folder.name}"/>
             <TextView
                 android:id="@+id/type_question"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/cd_folder_name"
-                android:text="@{folder.typeQuestion}"/>
+                android:hint="Question"
+                android:text="@{folder.typeQuestion}"
+                android:layout_marginLeft="@dimen/folder_margin_type"/>
             <TextView
                 android:id="@+id/type_answer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/cd_folder_name"
-                android:text="@{folder.typeAnswer}"/>
+                android:hint="Answer"
+                android:text="@{folder.typeAnswer}"
+                android:layout_marginLeft="@dimen/folder_margin_type"/>
         </LinearLayout>
 
 

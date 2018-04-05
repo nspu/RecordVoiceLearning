@@ -18,7 +18,6 @@ package fr.nspu.dev.recordvoicelearning.view.activity
 
 
 import android.arch.core.executor.testing.CountingTaskExecutorRule
-import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.action.ViewActions
@@ -30,11 +29,9 @@ import android.support.test.runner.AndroidJUnit4
 import org.hamcrest.CoreMatchers
 import org.hamcrest.MatcherAssert
 import org.junit.Before
-import org.junit.FixMethodOrder
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.junit.runners.MethodSorters
 
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
@@ -45,7 +42,6 @@ import fr.nspu.dev.recordvoicelearning.EspressoTestUtil
 import fr.nspu.dev.recordvoicelearning.R
 import fr.nspu.dev.recordvoicelearning.RecyclerViewItemCountAssertion
 import fr.nspu.dev.recordvoicelearning.controller.AppDatabase
-import fr.nspu.dev.recordvoicelearning.view.activity.MainActivity
 
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions.click
@@ -56,9 +52,9 @@ import android.support.test.espresso.matcher.ViewMatchers.isRoot
 import android.support.test.espresso.matcher.ViewMatchers.withContentDescription
 import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.espresso.matcher.ViewMatchers.withText
+import android.support.test.rule.GrantPermissionRule
 import android.support.v7.widget.RecyclerView
 
-//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(AndroidJUnit4::class)
 class MainActivityTest {
 
@@ -71,11 +67,17 @@ class MainActivityTest {
     private val TYPE_ANSWER2 = "Event"
 
     @get:Rule
-    val mActivityRule = ActivityTestRule(
+    val activityRule = ActivityTestRule(
             MainActivity::class.java)
 
     @get:Rule
-    val mCountingTaskExecutorRule = CountingTaskExecutorRule()
+    val countingTaskExecutorRule = CountingTaskExecutorRule()
+
+    @get:Rule
+    val runtimePermissionRule : GrantPermissionRule = GrantPermissionRule.grant(
+            android.Manifest.permission.RECORD_AUDIO,
+            android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
 
     private val mExecutor = AppExecutors()
 
@@ -87,7 +89,7 @@ class MainActivityTest {
     @Before
     fun disableRecyclerViewAnimations() {
         // Disable RecyclerView animations
-        EspressoTestUtil.disableAnimations(mActivityRule)
+        EspressoTestUtil.disableAnimations(activityRule)
     }
 
     @Before
@@ -97,7 +99,7 @@ class MainActivityTest {
         val databaseCreated = AppDatabase.getInstance(
                 InstrumentationRegistry.getTargetContext(), mExecutor)!!
                 .databaseCreated
-        mActivityRule.runOnUiThread {
+        activityRule.runOnUiThread {
             databaseCreated.observeForever(object : Observer<Boolean> {
                 override fun onChanged(aBoolean: Boolean?) {
                     if (java.lang.Boolean.TRUE == aBoolean) {
@@ -234,6 +236,6 @@ class MainActivityTest {
 
     @Throws(TimeoutException::class, InterruptedException::class)
     private fun drain() {
-        mCountingTaskExecutorRule.drainTasks(1, TimeUnit.MINUTES)
+        countingTaskExecutorRule.drainTasks(1, TimeUnit.MINUTES)
     }
 }

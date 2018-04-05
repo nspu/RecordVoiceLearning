@@ -1,8 +1,7 @@
 package fr.nspu.dev.recordvoicelearning.utils
 
+import org.junit.Assert.assertEquals
 import org.junit.Test
-
-import org.junit.Assert.*
 
 /**
  * Created by nspu on 24/02/18.

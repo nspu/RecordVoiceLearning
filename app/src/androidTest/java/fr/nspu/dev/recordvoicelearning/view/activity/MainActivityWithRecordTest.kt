@@ -1,6 +1,8 @@
 package fr.nspu.dev.recordvoicelearning.view.activity
 
 
+import android.os.Build
+import android.support.test.InstrumentationRegistry
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import android.view.View
@@ -30,6 +32,7 @@ import android.support.test.espresso.matcher.ViewMatchers.withContentDescription
 import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.espresso.matcher.ViewMatchers.withParent
 import android.support.test.espresso.matcher.ViewMatchers.withText
+import android.support.test.rule.GrantPermissionRule
 import android.support.v7.widget.RecyclerView
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.Matchers.`is`
@@ -37,7 +40,12 @@ import org.hamcrest.Matchers.`is`
 @RunWith(AndroidJUnit4::class)
 class MainActivityWithRecordTest {
     @get:Rule
-    var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
+    var activityTestRule = ActivityTestRule(MainActivity::class.java)
+
+    @get:Rule
+    val permissionRule : GrantPermissionRule = GrantPermissionRule.grant(
+            android.Manifest.permission.RECORD_AUDIO,
+            android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
 
     @Test

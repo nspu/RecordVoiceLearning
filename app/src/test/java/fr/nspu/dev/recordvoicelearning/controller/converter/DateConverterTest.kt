@@ -1,11 +1,9 @@
 package fr.nspu.dev.recordvoicelearning.controller.converter
 
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Test
-
-import java.util.Date
-
-import org.junit.Assert.*
-import org.junit.BeforeClass
+import java.util.*
 
 /**
  * Created by nspu on 18-02-22.

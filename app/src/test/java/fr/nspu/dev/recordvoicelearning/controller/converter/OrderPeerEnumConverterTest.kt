@@ -1,10 +1,8 @@
 package fr.nspu.dev.recordvoicelearning.controller.converter
 
-import org.junit.Test
-
 import fr.nspu.dev.recordvoicelearning.utils.OrderPeerEnum
-
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Test
 
 /**
  * Created by nspu on 18-02-22.

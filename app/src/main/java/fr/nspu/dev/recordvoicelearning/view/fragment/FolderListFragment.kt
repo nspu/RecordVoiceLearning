@@ -52,7 +52,7 @@ class FolderListFragment : Fragment() {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_list_folder, container, false)
 
         mFolderAdapter = FolderAdapter(mFolderClickCallback)
-        mBinding!!.foldersList.adapter = mFolderAdapter
+        mBinding.foldersList.adapter = mFolderAdapter
         setHasOptionsMenu(true)
 
         return mBinding.root
@@ -75,14 +75,14 @@ class FolderListFragment : Fragment() {
         // Update the list when the data changes
         viewModel.folders.observe(this, Observer { folderEntities ->
             if (folderEntities != null) {
-                mBinding!!.isLoading = false
+                mBinding.isLoading = false
                 mFolderAdapter!!.setFolderList(folderEntities)
             } else {
-                mBinding!!.isLoading = true
+                mBinding.isLoading = true
             }
             // espresso does not know how to wait for data binding's loop so we execute changes
             // sync.
-            mBinding!!.executePendingBindings()
+            mBinding.executePendingBindings()
         })
     }
 

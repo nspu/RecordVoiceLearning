@@ -105,7 +105,7 @@ class ListenPeersActivity : AppCompatActivity() {
                 //onPageSelected is not called when the first element is display but onPageScrolled yes
                 //So we call one time onPageSeleced with the first position
                 if (!firstCall) {
-                    this.onPageSelected(0)
+                        this.onPageSelected(0)
                     firstCall = true
                 }
             }
@@ -291,6 +291,6 @@ class ListenPeersActivity : AppCompatActivity() {
         /**
          * The [ViewPager] that will host the section contents.
          */
-        private var mViewPager: ViewPager? = null
+        private var     mViewPager: ViewPager? = null
     }
 }
