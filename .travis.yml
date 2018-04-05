@@ -1,15 +1,27 @@
 language: android
 jdk: oraclejdk8
-sudo: false
+
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+  - $HOME/.gradle/caches/
+  - $HOME/.gradle/wrapper/
+
+env:
+  matrix:
+    - ANDROID_TARGET=android-22  ANDROID_ABI=armeabi-v7a
 
 android:
   components:
+    - tools
     - platform-tools
     - tools
     - build-tools-27.1.0
     - android-22
-    - sys-img-armeabi-v7a-android-22
     - extra-android-m2repository
+    - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
 
   licenses:
       - 'android-sdk-preview-license-.+'
@@ -17,14 +29,23 @@ android:
       - 'google-gdk-license-.+'
 
 before_script:
-  # Create and start emulator
-  - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
-  - emulator -avd test -no-audio -no-window &
+  - set -e
+  - gradle wrapper -b wrapper.gradle
+  - cp travis.gradle.properties gradle.properties
+  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI --device 'Nexus 4' --sdcard 128M
+  - export QEMU_AUDIO_DRV=none
+  - emulator -avd test -no-window -skin 768x1280 &
+
+script:
+  - set -e
+  - ./gradlew test
   - android-wait-for-emulator
-  - adb shell settings put global window_animation_scale 0 &
-  - adb shell settings put global transition_animation_scale 0 &
-  - adb shell settings put global animator_duration_scale 0 &
-  - adb shell input keyevent 82 &
+  - adb shell settings put global window_animation_scale 0
+  - adb shell settings put global transition_animation_scale 0
+  - adb shell settings put global animator_duration_scale 0
+  - adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
+  - adb shell input keyevent 82
+  - ./gradlew connectedCheck
 
 before_install:
   - yes | sdkmanager 'platforms;android-27'
