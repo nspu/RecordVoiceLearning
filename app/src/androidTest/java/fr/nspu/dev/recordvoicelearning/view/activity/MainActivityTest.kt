@@ -44,9 +44,7 @@ import fr.nspu.dev.recordvoicelearning.RecyclerViewItemCountAssertion
 import fr.nspu.dev.recordvoicelearning.controller.AppDatabase
 
 import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.action.ViewActions.click
-import android.support.test.espresso.action.ViewActions.longClick
-import android.support.test.espresso.action.ViewActions.typeText
+import android.support.test.espresso.action.ViewActions.*
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.isRoot
 import android.support.test.espresso.matcher.ViewMatchers.withContentDescription
@@ -55,7 +53,7 @@ import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.test.rule.GrantPermissionRule
 import android.support.v7.widget.RecyclerView
 
-//@RunWith(AndroidJUnit4::class)
+@RunWith(AndroidJUnit4::class)
 class MainActivityTest {
 
     private val NAME = "English - French"
@@ -114,7 +112,7 @@ class MainActivityTest {
     }
 
 
-//    @Test
+    @Test
     @Throws(Throwable::class)
     fun AllTest() {
         test1AddFolders()
@@ -138,6 +136,8 @@ class MainActivityTest {
     @Throws(Throwable::class)
     private fun addFolder(name: String, typeQuestion: String, typeAnswer: String) {
         drain()
+        closeSoftKeyboard();
+        Thread.sleep(1000);
         onView(withId(R.id.fab_add_folder)).perform(click())
         drain()
         onView(withId(R.id.add_name_et)).perform(typeText(name))

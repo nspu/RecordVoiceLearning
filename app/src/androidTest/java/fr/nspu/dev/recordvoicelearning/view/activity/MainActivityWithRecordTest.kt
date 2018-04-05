@@ -58,7 +58,8 @@ class MainActivityWithRecordTest {
         } catch (e: InterruptedException) {
             e.printStackTrace()
         }
-
+        closeSoftKeyboard();
+        Thread.sleep(1000);
         val floatingActionButton = onView(
                 allOf(withId(R.id.fab_add_folder),
                         childAtPosition(
