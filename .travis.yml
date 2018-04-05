@@ -1,42 +1,51 @@
+sudo: true
+
 language: android
+
 jdk: oraclejdk8
-sudo: false
-cache: false
+
 env:
-  matrix:
-    - ANDROID_TARGET=android-22  ANDROID_ABI=armeabi-v7a
+  global:
+    - GRADLE_OPTS='-Dorg.gradle.daemon=false -Dorg.gradle.parallel=false -Dkotlin.incremental=false -DdisablePreDex'
+    - ANDROID_TARGET=android-27
+    - ANDROID_BUILD_TOOLS_VERSION=27.0.3
+    - ANDROID_ABI=armeabi-v7a
+    - ANDROID_EMULATOR_TARGET=android-22
 
 android:
   components:
     - tools
-    - platform-tools
-    - tools
-    - build-tools-27.1.0
-    - android-22
-    - extra-android-m2repository
-    - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
+    - build-tools-$ANDROID_BUILD_TOOLS_VERSION
+    - $ANDROID_TARGET
+    - $ANDROID_EMULATOR_TARGET
+    - extra-google-google_play_services
+    - extra-android-support
+    - extra
+    - sys-img-$ANDROID_ABI-$ANDROID_EMULATOR_TARGET
 
-  licenses:
-      - 'android-sdk-preview-license-.+'
-      - 'android-sdk-license-.+'
-      - 'google-gdk-license-.+'
+licenses:
+  - 'android-sdk-license-.+'
 
 before_install:
-  - yes | sdkmanager 'platforms;android-27'
+  - echo yes | sdkmanager "platforms;$ANDROID_TARGET" "build-tools;$ANDROID_BUILD_TOOLS_VERSION"
 
 before_script:
-  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI --device 'Nexus 4' --sdcard 128M
-  - export QEMU_AUDIO_DRV=none
-  - emulator -avd test -no-audio -no-window &
+  - sudo service postgresql stop || true
+  - sudo service mysql stop || true
+  - sudo service memcached stop || true
+  - sudo service bootlogd stop || true
+  - sudo service elasticsearch stop || true
+  - sudo service mongodb stop || true
+  - sudo service cassandra stop || true
+  - sudo service rsync stop || true
+  - sudo service x11-common stop || true
 
 script:
-  - set -e
-  - ./gradlew test
+  - echo no | android create avd --force -n test -t $ANDROID_EMULATOR_TARGET --abi $ANDROID_ABI
+  - emulator -avd test -no-window &
+  - ./gradlew check
   - android-wait-for-emulator
-  - adb shell settings put global window_animation_scale 0
-  - adb shell settings put global transition_animation_scale 0
-  - adb shell settings put global animator_duration_scale 0
-  - adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
-  - adb shell input keyevent 82
+  - adb shell input keyevent 82 &
   - ./gradlew connectedCheck
+
 
