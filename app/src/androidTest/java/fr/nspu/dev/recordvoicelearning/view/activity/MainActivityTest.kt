@@ -155,7 +155,7 @@ class MainActivityTest {
     private fun test3CheckFirstElementOnFolders() {
         drain()
 
-        onView(withContentDescription(R.string.cd_folders_list))
+        onView(withId(R.id.folders_list))
                 .check(matches(EspressoTestUtil.atPositionOnView(0, withText(NAME), R.id.name)))
 
                 .check(matches(EspressoTestUtil.atPositionOnView(0, withText(TYPE_QUESTION), R.id.type_question)))
