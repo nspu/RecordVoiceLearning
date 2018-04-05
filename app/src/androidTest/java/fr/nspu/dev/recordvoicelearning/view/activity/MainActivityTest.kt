@@ -175,9 +175,11 @@ class MainActivityTest {
         drain()
         // Then the second screen with the comments should appear.
         onView(withId(R.id.name)).check(matches(withText(NAME)))
+        drain()
         onView(withId(R.id.type_question)).check(matches(withText(TYPE_QUESTION)))
+        drain()
         onView(withId(R.id.type_answer)).check(matches(withText(TYPE_ANSWER)))
-
+        drain()
         onView(isRoot()).perform(ViewActions.pressBack())
     }
 
@@ -207,9 +209,11 @@ class MainActivityTest {
         drain()
         // Then the second screen with the comments should appear.
         onView(withId(R.id.name)).check(matches(withText(NAME2)))
+        drain()
         onView(withId(R.id.type_question)).check(matches(withText(TYPE_QUESTION2)))
+        drain()
         onView(withId(R.id.type_answer)).check(matches(withText(TYPE_ANSWER2)))
-
+        drain()
         onView(isRoot()).perform(ViewActions.pressBack())
 
 
