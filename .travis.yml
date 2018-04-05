@@ -21,6 +21,10 @@ android:
       - 'android-sdk-license-.+'
       - 'google-gdk-license-.+'
 
+before_install:
+  - yes | sdkmanager 'platforms;android-27'
+  - yes | android update sdk --all --filter build-tools-27.1.0 --no-ui --force`
+
 before_script:
   - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI --device 'Nexus 4' --sdcard 128M
   - export QEMU_AUDIO_DRV=none
@@ -37,5 +41,3 @@ script:
   - adb shell input keyevent 82
   - ./gradlew connectedCheck
 
-before_install:
-  - yes | sdkmanager 'platforms;android-27'
