@@ -55,7 +55,7 @@ import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.test.rule.GrantPermissionRule
 import android.support.v7.widget.RecyclerView
 
-@RunWith(AndroidJUnit4::class)
+//@RunWith(AndroidJUnit4::class)
 class MainActivityTest {
 
     private val NAME = "English - French"
@@ -114,7 +114,7 @@ class MainActivityTest {
     }
 
 
-    @Test
+//    @Test
     @Throws(Throwable::class)
     fun AllTest() {
         test1AddFolders()
