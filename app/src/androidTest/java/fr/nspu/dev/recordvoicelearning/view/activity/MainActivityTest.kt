@@ -136,8 +136,7 @@ class MainActivityTest {
     @Throws(Throwable::class)
     private fun addFolder(name: String, typeQuestion: String, typeAnswer: String) {
         drain()
-        closeSoftKeyboard();
-        Thread.sleep(1000);
+
         onView(withId(R.id.fab_add_folder)).perform(click())
         drain()
         onView(withId(R.id.add_name_et)).perform(typeText(name))
@@ -236,6 +235,8 @@ class MainActivityTest {
 
     @Throws(TimeoutException::class, InterruptedException::class)
     private fun drain() {
+        closeSoftKeyboard();
+        Thread.sleep(1000);
         countingTaskExecutorRule.drainTasks(1, TimeUnit.MINUTES)
     }
 }

@@ -37,7 +37,7 @@ import android.support.v7.widget.RecyclerView
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.Matchers.`is`
 
-@RunWith(AndroidJUnit4::class)
+//@RunWith(AndroidJUnit4::class)
 class MainActivityWithRecordTest {
     @get:Rule
     var activityTestRule = ActivityTestRule(MainActivity::class.java)
@@ -48,7 +48,7 @@ class MainActivityWithRecordTest {
             android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
 
-    @Test
+//    @Test
     fun mainActivityRecordTest() {
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
