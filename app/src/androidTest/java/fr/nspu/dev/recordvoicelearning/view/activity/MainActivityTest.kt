@@ -20,40 +20,34 @@ package fr.nspu.dev.recordvoicelearning.view.activity
 import android.arch.core.executor.testing.CountingTaskExecutorRule
 import android.arch.lifecycle.Observer
 import android.support.test.InstrumentationRegistry
+import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions
+import android.support.test.espresso.action.ViewActions.*
+import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.contrib.RecyclerViewActions
 import android.support.test.espresso.matcher.ViewMatchers
+import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.rule.ActivityTestRule
+import android.support.test.rule.GrantPermissionRule
 import android.support.test.runner.AndroidJUnit4
-
+import android.support.v7.widget.RecyclerView
+import android.view.WindowManager
+import fr.nspu.dev.recordvoicelearning.AppExecutors
+import fr.nspu.dev.recordvoicelearning.EspressoTestUtil
+import fr.nspu.dev.recordvoicelearning.R
+import fr.nspu.dev.recordvoicelearning.RecyclerViewItemCountAssertion
+import fr.nspu.dev.recordvoicelearning.controller.AppDatabase
 import org.hamcrest.CoreMatchers
 import org.hamcrest.MatcherAssert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeoutException
+import com.squareup.spoon.SpoonRule
 
-import fr.nspu.dev.recordvoicelearning.AppExecutors
-import fr.nspu.dev.recordvoicelearning.EspressoTestUtil
-import fr.nspu.dev.recordvoicelearning.R
-import fr.nspu.dev.recordvoicelearning.RecyclerViewItemCountAssertion
-import fr.nspu.dev.recordvoicelearning.controller.AppDatabase
-
-import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.action.ViewActions.*
-import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.matcher.ViewMatchers.isRoot
-import android.support.test.espresso.matcher.ViewMatchers.withContentDescription
-import android.support.test.espresso.matcher.ViewMatchers.withId
-import android.support.test.espresso.matcher.ViewMatchers.withText
-import android.support.test.rule.GrantPermissionRule
-import android.support.v7.widget.RecyclerView
-import android.support.test.internal.runner.junit4.statement.UiThreadStatement.runOnUiThread
-import android.view.WindowManager
 
 
 
@@ -74,6 +68,9 @@ class MainActivityTest {
 
     @get:Rule
     val countingTaskExecutorRule = CountingTaskExecutorRule()
+
+    @Rule
+    val spoon = SpoonRule()
 
     @get:Rule
     val runtimePermissionRule : GrantPermissionRule = GrantPermissionRule.grant(
@@ -117,7 +114,7 @@ class MainActivityTest {
 
     @Before
     fun unlockScreen() {
-        val activity = activityRule.getActivity()
+        val activity = activityRule.activity
         val wakeUpDevice = Runnable {
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or
                     WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
@@ -131,11 +128,17 @@ class MainActivityTest {
     @Throws(Throwable::class)
     fun AllTest() {
         test1AddFolders()
+        spoon.screenshot(activityRule.activity, "add folder");
         test3CheckFirstElementOnFolders()
+        spoon.screenshot(activityRule.activity, "First element");
         test4clickOnFirstItemForOpenFolder()
+        spoon.screenshot(activityRule.activity, "add Open folder");
         test5CheckSeventhElementOnFolders()
+        spoon.screenshot(activityRule.activity, "add seventh element");
         test6ClickOnSeventhItemForOpenFolder()
+        spoon.screenshot(activityRule.activity, "click");
         test7DeleteAllElements()
+        spoon.screenshot(activityRule.activity, "deleted");
     }
 
     //    @Test
