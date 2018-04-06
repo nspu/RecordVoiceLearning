@@ -169,7 +169,7 @@ class MainActivityTest {
 
         drain()
         // When clicking on the first product
-        onView(ViewMatchers.withContentDescription(R.string.cd_folders_list))
+        onView(ViewMatchers.withId(R.id.folders_list))
                 .perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(0))
                 .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
         drain()
@@ -188,7 +188,7 @@ class MainActivityTest {
     private fun test5CheckSeventhElementOnFolders() {
         drain()
 
-        onView(withContentDescription(R.string.cd_folders_list))
+        onView(withId(R.id.folders_list))
                 .perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(3))
                 .check(matches(EspressoTestUtil.atPositionOnView(3, withText(NAME2), R.id.name)))
 
@@ -203,7 +203,7 @@ class MainActivityTest {
 
         drain()
         // When clicking on the first product
-        onView(ViewMatchers.withContentDescription(R.string.cd_folders_list))
+        onView(ViewMatchers.withId(R.id.folders_list))
                 .perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(3))
                 .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(3, click()))
         drain()
@@ -227,12 +227,12 @@ class MainActivityTest {
 
             drain()
 
-            onView(ViewMatchers.withContentDescription(R.string.cd_folders_list))
+            onView(ViewMatchers.withId(R.id.folders_list))
                     .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(i, longClick()))
 
             drain()
 
-            onView(ViewMatchers.withContentDescription(R.string.cd_folders_list))
+            onView(ViewMatchers.withId(R.id.folders_list))
                     .check(RecyclerViewItemCountAssertion(i))
         }
     }
