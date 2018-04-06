@@ -69,7 +69,7 @@ class MainActivityTest {
     @get:Rule
     val countingTaskExecutorRule = CountingTaskExecutorRule()
 
-    @Rule
+    @get:Rule
     val spoon = SpoonRule()
 
     @get:Rule
@@ -128,13 +128,13 @@ class MainActivityTest {
     @Throws(Throwable::class)
     fun AllTest() {
         test1AddFolders()
-        spoon.screenshot(activityRule.activity, "add folder");
+        spoon.screenshot(activityRule.activity, "add_folder");
         test3CheckFirstElementOnFolders()
-        spoon.screenshot(activityRule.activity, "First element");
+        spoon.screenshot(activityRule.activity, "First_element");
         test4clickOnFirstItemForOpenFolder()
-        spoon.screenshot(activityRule.activity, "add Open folder");
+        spoon.screenshot(activityRule.activity, "add_Open_folder");
         test5CheckSeventhElementOnFolders()
-        spoon.screenshot(activityRule.activity, "add seventh element");
+        spoon.screenshot(activityRule.activity, "add_seventh_element");
         test6ClickOnSeventhItemForOpenFolder()
         spoon.screenshot(activityRule.activity, "click");
         test7DeleteAllElements()
