@@ -52,6 +52,10 @@ import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.test.rule.GrantPermissionRule
 import android.support.v7.widget.RecyclerView
+import android.support.test.internal.runner.junit4.statement.UiThreadStatement.runOnUiThread
+import android.view.WindowManager
+
+
 
 @RunWith(AndroidJUnit4::class)
 class MainActivityTest {
@@ -109,6 +113,17 @@ class MainActivityTest {
         }
         MatcherAssert.assertThat("database should've initialized",
                 latch.await(1, TimeUnit.MINUTES), CoreMatchers.`is`(true))
+    }
+
+    @Before
+    fun unlockScreen() {
+        val activity = activityRule.getActivity()
+        val wakeUpDevice = Runnable {
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or
+                    WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
+                    WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        }
+        activity.runOnUiThread(wakeUpDevice)
     }
 
 
@@ -240,7 +255,7 @@ class MainActivityTest {
     @Throws(TimeoutException::class, InterruptedException::class)
     private fun drain() {
         closeSoftKeyboard();
-        Thread.sleep(1000);
+//        Thread.sleep(1000);
         countingTaskExecutorRule.drainTasks(1, TimeUnit.MINUTES)
     }
 }
