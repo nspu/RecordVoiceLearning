@@ -254,7 +254,7 @@ class MainActivityTest {
 
     @Throws(TimeoutException::class, InterruptedException::class)
     private fun drain() {
-        closeSoftKeyboard();
+//        closeSoftKeyboard();
 //        Thread.sleep(1000);
         countingTaskExecutorRule.drainTasks(1, TimeUnit.MINUTES)
     }
