@@ -1,4 +1,4 @@
-# RecordVoiceLearning  [![Build Status](https://travis-ci.org/nspu/RecordVoiceLearning.svg?branch=master)](https://travis-ci.org/nspu/RecordVoiceLearning)
+# RecordVoiceLearning 
 Learn by record your own questions and answers with you smartphone microphone. 
 
 Record your questions and your answers. Then listen the question and try to find the answer. 
